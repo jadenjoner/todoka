@@ -632,6 +632,7 @@ function openOptions(){
 
 function openSidebar(){
   $('aside').style.display = 'block';
+  if(window.innerWidth < 650)
   $('main').style.display = 'none';
   $('.mobile-menu').style.display = 'none';
 }
