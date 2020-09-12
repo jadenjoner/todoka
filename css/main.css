@@ -505,7 +505,7 @@ main .center .checkbox input:checked ~ .checkmark {
 }
 
 .popup {
-  z-index: 1010;
+  z-index: 1010 !important;
   position: fixed;
   top: 0;
   left: 0;
