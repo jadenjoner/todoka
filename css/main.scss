@@ -590,6 +590,7 @@ main {
 
   .box {
     //filter: contrast(90%);
+    z-index: 1010;
     width: 600px;
     max-width: 100%;
     max-height: 90vh;
@@ -608,10 +609,6 @@ main {
       color: $white2;
       text-align: left;
       @include content;
-
-      @media (max-width: 650px) {
-        padding-bottom: 80px;
-      }
 
       #formIconSample {
         background: $black4;
@@ -632,6 +629,7 @@ main {
 
 
 .mobile-menu{
+  z-index: 1000;
   display: none;
   position: fixed;
   left: 8px;
