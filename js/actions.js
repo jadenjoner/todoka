@@ -47,7 +47,11 @@ function page(number=currentPage){
     $('.mobile-menu').style.display = 'block'
   }
   if(number == -1){
-    createHomePage();
+    if(userData.tasks.length)
+      createHomePage();
+    else {
+      $('main .center').innerHTML = '<img src="img/todoka-guide.svg"/>'
+    }
     return;
   }
   updateSidebar(userData, number)
