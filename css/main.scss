@@ -609,6 +609,10 @@ main {
       text-align: left;
       @include content;
 
+      @media (max-width: 650px) {
+        padding-bottom: 80px;
+      }
+
       #formIconSample {
         background: $black4;
         border: 2px solid $black2;
