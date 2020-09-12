@@ -27,6 +27,9 @@ $white6: #565c81; // Global
 html {
   font-family: Ubuntu,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
+body{
+  background: $black4;
+}
 
 i {
   font-family: "Material Icons";
