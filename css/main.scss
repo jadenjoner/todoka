@@ -581,6 +581,7 @@ main {
 }
 
 .popup {
+  z-index: 1010;
   position: fixed;
   top: 0;
   left: 0;
@@ -593,7 +594,6 @@ main {
 
   .box {
     //filter: contrast(90%);
-    z-index: 1010;
     width: 600px;
     max-width: 100%;
     max-height: 90vh;
@@ -629,7 +629,7 @@ main {
     }
   }
 }
- 
+
 
 .mobile-menu{
   z-index: 1000;
