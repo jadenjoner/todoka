@@ -84,7 +84,7 @@ function createHomePage(){
   updateSidebar(userData, -1)
 
   if(userData.homeGroups == undefined){
-    userData.homeGroups=[1,0,0,0,0,0,0,0,0]
+    userData.homeGroups=[0,1,1,1,1,1,1,1,1]
     setData();
   }
 
@@ -284,6 +284,7 @@ function homeTemplate(arr){
           onclick="checkTheBox(event, '{groupNumber2}', '{taskNumber}', '{page}')">
           check_box_outline_blank</i>
           <i style="opacity:0.5" onclick="page('{page}')">{pageIcon}</i>
+          <i style="opacity:0.5;color:{taskIconColor}" onclick="page('{page}')">{taskIcon}</i>
           <span class="task-name">{priority} {taskName}</span>
           <span class="info">{pageName} - {groupName2}</span>
           <div class="right">
@@ -311,7 +312,7 @@ function generateInfo(time, effort){
   else if(time == 2)result += 'A bit of work '
   else if(time == 3)result += 'Lots of work '
   else if(time == 4){result += 'Event';return result}
-  else if(time == 5){result += 'Note';return result}
+  else if(time == 5){result += 'Reminder';return result}
   if(effort == 1)result += 'but its easy'
   else if(effort == 2)result += 'and some effort'
   else result += 'and its hard'
@@ -483,7 +484,7 @@ function addTask(group, container=currentPage){
         {text:"Around half an hour",value:"2"},
         {text:"A good amount of time",value:"3"},
         {text:"This is an event",value:"4"},
-        {text:"This is an note",value:"5"},
+        {text:"This is a reminder",value:"5"},
       ]
     },
     effort: {
@@ -537,7 +538,7 @@ function editTask(group, task, container=currentPage){
         {text:"Around half an hour",value:"2",default:taskData.time==2},
         {text:"A good amount of time",value:"3",default:taskData.time==3},
         {text:"This is an event",value:"4",default:taskData.time==4},
-        {text:"This is an note",value:"5",default:taskData.time==5},
+        {text:"This is a reminder",value:"5",default:taskData.time==5},
       ]
     },
     effort: {
