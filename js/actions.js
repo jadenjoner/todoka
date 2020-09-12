@@ -47,10 +47,10 @@ function page(number=currentPage){
     $('.mobile-menu').style.display = 'block'
   }
   if(number == -1){
-    if(userData.tasks.length)
+    if(userData.tasks.length > 0)
       createHomePage();
     else {
-      $('main .center').innerHTML = '<img src="img/todoka-guide.svg"/>'
+      $('main .center').innerHTML = '<img style="width:100%" src="img/todoka-guide.svg"/>'
     }
     return;
   }
