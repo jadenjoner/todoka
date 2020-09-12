@@ -37,10 +37,10 @@ function updateSidebar(data = userData, selected=0) {
 }
 
 function page(number=currentPage){
-  currentPage = number;
   if(userData.tasks.length == 0){
     number = -1;
   }
+  currentPage = number;
   if(window.innerWidth < 650){
     $('aside').style.display = 'none'
     $('main').style.display = 'block'
@@ -52,6 +52,7 @@ function page(number=currentPage){
     else {
       $('main .center').innerHTML = '<img style="width:100%" src="img/todoka-guide.svg"/>'
     }
+    updateSidebar(userData, number)
     return;
   }
   updateSidebar(userData, number)
@@ -355,8 +356,8 @@ function prompter(a, func){
       }
     }
   }
-  result+='<br><input onclick="prompterBefore(event)" type="submit" value="submit">'
-  result+='<input style="opacity: 0.7; float: right" onclick="closePopup()" type="submit" value="Cancel">'
+  result+='<br><input onclick="prompterBefore(event)" class="button" type="submit" value="submit">'
+  result+='<input style="opacity: 0.7; float: right" class="button" onclick="closePopup()" type="submit" value="Cancel">'
   prompterAfter = func
   $('.popup .center').innerHTML = result;
   $('.popup').style.display = 'flex'
