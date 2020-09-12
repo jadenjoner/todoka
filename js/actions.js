@@ -126,7 +126,8 @@ function createHomePage(){
     })));
     results.push(result);
   });
-  if(results.length == 0){
+  console.log(results.filter(a=>a.length))
+  if(results.filter(a=>a.length).length == 0){
     $('main .center').innerHTML = homePageHTML
     return;
   }
