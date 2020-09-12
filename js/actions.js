@@ -50,7 +50,7 @@ function page(number=currentPage){
     if(userData.tasks.length > 0)
       createHomePage();
     else {
-      $('main .center').innerHTML = '<img style="width:100%" src="img/todoka-guide.svg"/>'
+      $('main .center').innerHTML = '<img style="width:100%" src="img/todoka-guide.gif"/>'
     }
     updateSidebar(userData, number)
     return;
