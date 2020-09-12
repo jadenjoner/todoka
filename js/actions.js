@@ -1,6 +1,9 @@
 var userData = getData();
 var prompterAfter;
 var currentPage = 0;
+var homePageHTML =
+`<img style="width:100%" src="img/todoka-title.svg"/><br>
+<img style="width:100%;border-radius:8px" src="img/todoka-guide.gif"/>`
 
 function getData() {
   if(localStorage.getItem('taskData') == null)setData({tasks: []});
@@ -50,7 +53,7 @@ function page(number=currentPage){
     if(userData.tasks.length > 0)
       createHomePage();
     else {
-      $('main .center').innerHTML = '<img style="width:100%" src="img/todoka-title.svg"/><br><img style="width:100%;border-radius:8px" src="img/todoka-guide.gif"/>'
+      $('main .center').innerHTML = homePageHTML
     }
     updateSidebar(userData, number)
     return;
@@ -123,6 +126,10 @@ function createHomePage(){
     })));
     results.push(result);
   });
+  if(results.length == 0){
+    $('main .center').innerHTML = homePageHTML
+    return;
+  }
 
   var groups = [
       {
