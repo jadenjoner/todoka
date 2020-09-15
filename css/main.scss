@@ -438,7 +438,7 @@ aside {
   height: 100%;
   color: $white3;
   border-bottom: 4px solid $theme;
-  border-right: 2px solid $black0;
+  box-shadow: 2px 0 0 $black0;
 
   @media (max-width: 650px) {
     width: 100%;

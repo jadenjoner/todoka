@@ -3,7 +3,7 @@ var prompterAfter;
 var currentPage = 0;
 var homePageHTML =
 `<img style="width:100%" src="img/todoka-title.svg"/><br>
-<img style="width:100%;border-radius:8px" src="img/todoka-guide.gif"/>`
+<img style="width:100%;border-radius:8px;border:2px solid #5b48e9" src="img/todoka-guide.gif"/>`
 
 function getData() {
   if(localStorage.getItem('taskData') == null)setData({tasks: []});
