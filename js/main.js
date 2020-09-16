@@ -4,7 +4,7 @@ page(-1)
 openSidebar();
 setTheme();
 
-if(!localStorage.getItem('todoka'))window.location.replace("http://www.w3schools.com");
+if(!localStorage.getItem('todoka'))window.location.replace("start/");
 
 
 console.log(`%c\n\n                             %#################%
