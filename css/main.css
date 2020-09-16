@@ -183,7 +183,6 @@ main .center h2 {
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 6px;
-  text-transform: capitalize;
 }
 main .center a {
   color: #9ea3bb;
@@ -556,7 +555,6 @@ main .center .checkbox input:checked ~ .checkmark {
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 6px;
-  text-transform: capitalize;
 }
 .popup .box .center a {
   color: #9ea3bb;

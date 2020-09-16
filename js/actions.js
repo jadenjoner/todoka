@@ -227,7 +227,7 @@ function createHomePage(){
 function pageTemplate(arr){
   return repit(`
     <h1>{title}</h1>
-    <button onclick="deleteContainer()">Remove Container</button>
+    <button onclick="deleteContainer()">Remove Catagory</button>
     <br>
     <br>
     {for groups}
@@ -369,7 +369,7 @@ function prompter(a, func){
       }
     }
   }
-  result+='<br><input onclick="prompterBefore(event)" class="button" type="submit" value="submit">'
+  result+='<br><input onclick="prompterBefore(event)" class="button" type="submit" value="Submit">'
   result+='<input style="opacity: 0.7; float: right" class="button" onclick="closePopup()" type="submit" value="Cancel">'
   prompterAfter = func
   $('.popup .center').innerHTML = result;
@@ -430,8 +430,8 @@ function closePopup(e){
 
 function addContainer(){
   prompter({
-    h1: "Creat new container",
-    name: "Container Name",
+    h1: "Creat new catagory",
+    name: "Catagory Name ex: work",
     selectIcon: "Icon"
   }, (result) => {
     userData.tasks = [...userData.tasks, {
@@ -465,7 +465,7 @@ function addGroup(container=currentPage){
 
 function deleteContainer(container=currentPage){
   prompter({
-    h2: 'Are you sure you want to delete '+userData.tasks[currentPage].name+" container",
+    h2: 'Are you sure you want to delete '+userData.tasks[currentPage].name+" catagory",
   }, (result) => {
     userData.tasks.splice(currentPage, 1);
     updateSidebar();
@@ -478,8 +478,12 @@ function addTask(group, container=currentPage){
   prompter({
     h1: "New Task",
     name: "Task Name",
+    priority: {
+      label: "Priority Task",
+      type: "checkbox",
+    },
     dewdate: {
-      label: "When should this be done",
+      label: "When should this be done?",
       type: "radio",
       options: [
         {text:"Today",value:"1",default:true},
@@ -487,19 +491,15 @@ function addTask(group, container=currentPage){
         {text:"This Month",value:"3"},
       ]
     },
-    priority: {
-      label: "Priority Task",
-      type: "checkbox",
-    },
     time: {
-      label: "How long will this task take",
+      label: "How long will this task take?",
       type: "radio",
       options: [
-        {text:"Not long",value:"1",default:true},
-        {text:"Around half an hour",value:"2"},
-        {text:"A good amount of time",value:"3"},
-        {text:"This is an event",value:"4"},
-        {text:"This is a reminder",value:"5"},
+        {text:"Less than half an hour",value:"1",default:true},
+        {text:"Half an hour to an hour",value:"2"},
+        {text:"More than a couple hours",value:"3"},
+        {text:"All day event",value:"4"},
+        //{text:"This is a reminder",value:"5"},
       ]
     },
     effort: {
@@ -531,8 +531,13 @@ function editTask(group, task, container=currentPage){
     setDefaultValues: true,
     h1: "Edit Task",
     name: taskData.name,
+    priority: {
+      label: "Priority Task",
+      type: "checkbox",
+      default: taskData.priority,
+    },
     dewdate: {
-      label: "When should this be done",
+      label: "When should this be done?",
       type: "radio",
       options: [
         {text:"Today",value:"1",default:taskData.date==1},
@@ -540,13 +545,8 @@ function editTask(group, task, container=currentPage){
         {text:"This Month",value:"3",default:taskData.date==3},
       ]
     },
-    priority: {
-      label: "Priority Task",
-      type: "checkbox",
-      default: taskData.priority,
-    },
     time: {
-      label: "How long will this task take",
+      label: "How long will this task take?",
       type: "radio",
       options: [
         {text:"Not long",value:"1",default:taskData.time==1},
@@ -557,7 +557,7 @@ function editTask(group, task, container=currentPage){
       ]
     },
     effort: {
-      label: "How difficult is this task",
+      label: "How difficult is this task?",
       type: "radio",
       options: [
         {text:"Easy",value:"1",default:taskData.effort==1},
@@ -666,8 +666,8 @@ function openOptions(){
   var themeOption = userData.theme ? userData.theme.charAt(0) : 1
   prompter({
     h1: 'Options',
-    html: '<button onclick="backupData()">Save Data</button>',
-    h2: 'Inport Data',
+    html: '<button onclick="backupData()">Export Data</button>',
+    h2: 'Import Data',
     fileInput: 'restoreFile',
     html2: '<a href="img/todoka.crx" download>Download chrome app</a>',
     filter: {
@@ -700,6 +700,7 @@ function openOptions(){
 }
 
 function setTheme(filter=userData.theme){
+  if(!userData.theme)return;
   $('body').style.filter = filter.substr(1);
   userData.theme = filter;
   setData();
