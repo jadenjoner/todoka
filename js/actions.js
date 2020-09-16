@@ -329,15 +329,18 @@ function generateInfo(time, effort){
 
 function prompter(a, func){
   var result = ''
+  function tager(text, c){
+    return (c.match(RegExp(`^${text}[0-9]?[0-9]?$`))||{}).input;
+  }
   for(var i in a){
     if(typeof a[i] == 'string')
     switch(i){
       case 'h1': result += `<h1>${a[i]}</h1>`; break;
-      case 'h2': result += `<h2>${a[i]}</h2>`; break;
-      case 'p': result += `<p>${a[i]}</p>`; break;
+      case tager('h2',i): result += `<h2>${a[i]}</h2>`; break;
+      case tager('p',i): result += `<p>${a[i]}</p>`; break;
       case 'color': result += generateColorPicker(); break;
-      case 'html': result += a[i]; break;
-      case 'fileInput': result += `<input type="file" name="${a[i]}">`
+      case tager('html',i): result += a[i]; break;
+      case tager('fileInput',i): result += `<input type="file" name="${a[i]}">`
       case 'selectIcon': result += `<input type="text" placeholder="${a[i]}"
       onkeyup="updateFormIcon(event)" class="formitem-icon"><i id="formIconSample">
       </i><br><a href="https://material.io/icons" target="_blank">
@@ -666,13 +669,14 @@ function openOptions(){
     html: '<button onclick="backupData()">Save Data</button>',
     h2: 'Inport Data',
     fileInput: 'restoreFile',
+    html2: '<a href="img/todoka.crx" download>Download chrome app</a>',
     filter: {
       label: "Select a filter theme",
       type: "radio",
       options: [
         {text:"Default",value:"1none",default:themeOption == 1},
         {text:"Darker",value:"2contrast(140%) grayscale(60.1%)",default:themeOption == 2},
-        {text:"White",value:"3invert(100%) hue-rotate(150deg) sepia(35%)",default:themeOption == 3},
+        {text:"White",value:"3invert(100%) hue-rotate(170deg) sepia(35%)",default:themeOption == 3},
         {text:"Green",value:"4hue-rotate(183deg) sepia(50%)",default:themeOption == 4},
         {text:"Orange",value:"5hue-rotate(123deg) sepia(50%)",default:themeOption == 5},
         {text:"Neutral",value:"6hue-rotate(149deg) sepia(89%) grayscale(40%)",default:themeOption == 6},
