@@ -192,7 +192,9 @@ main .center a {
 }
 main .center button,
 main .center input[type=button],
-main .center input[type=submit], main .center input.button {
+main .center input[type=submit],
+main .center input.button,
+main .center input[type=file] {
   background: #191d31;
   border: 2px solid #090b1d;
   padding: 8px 16px;
@@ -205,18 +207,25 @@ main .center input[type=submit], main .center input.button {
 }
 main .center button:hover,
 main .center input[type=button]:hover,
-main .center input[type=submit]:hover, main .center input.button:hover {
+main .center input[type=submit]:hover,
+main .center input.button:hover,
+main .center input[type=file]:hover {
   cursor: pointer;
   background: #212945;
   border-color: #5b48e9;
 }
 main .center button:active,
 main .center input[type=button]:active,
-main .center input[type=submit]:active, main .center input.button:active {
+main .center input[type=submit]:active,
+main .center input.button:active,
+main .center input[type=file]:active {
   transition: 0s;
   background: #5b48e9;
   border-color: #5b48e9;
   color: #efefef;
+}
+main .center input[type=file] {
+  padding-left: -50px !important;
 }
 main .center input[type=text],
 main .center input[type=number] {
@@ -556,7 +565,9 @@ main .center .checkbox input:checked ~ .checkmark {
 }
 .popup .box .center button,
 .popup .box .center input[type=button],
-.popup .box .center input[type=submit], .popup .box .center input.button {
+.popup .box .center input[type=submit],
+.popup .box .center input.button,
+.popup .box .center input[type=file] {
   background: #191d31;
   border: 2px solid #090b1d;
   padding: 8px 16px;
@@ -569,18 +580,25 @@ main .center .checkbox input:checked ~ .checkmark {
 }
 .popup .box .center button:hover,
 .popup .box .center input[type=button]:hover,
-.popup .box .center input[type=submit]:hover, .popup .box .center input.button:hover {
+.popup .box .center input[type=submit]:hover,
+.popup .box .center input.button:hover,
+.popup .box .center input[type=file]:hover {
   cursor: pointer;
   background: #212945;
   border-color: #5b48e9;
 }
 .popup .box .center button:active,
 .popup .box .center input[type=button]:active,
-.popup .box .center input[type=submit]:active, .popup .box .center input.button:active {
+.popup .box .center input[type=submit]:active,
+.popup .box .center input.button:active,
+.popup .box .center input[type=file]:active {
   transition: 0s;
   background: #5b48e9;
   border-color: #5b48e9;
   color: #efefef;
+}
+.popup .box .center input[type=file] {
+  padding-left: -50px !important;
 }
 .popup .box .center input[type=text],
 .popup .box .center input[type=number] {

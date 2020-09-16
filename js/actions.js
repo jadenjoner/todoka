@@ -337,6 +337,7 @@ function prompter(a, func){
       case 'p': result += `<p>${a[i]}</p>`; break;
       case 'color': result += generateColorPicker(); break;
       case 'html': result += a[i]; break;
+      case 'fileInput': result += `<input type="file" name="${a[i]}">`
       case 'selectIcon': result += `<input type="text" placeholder="${a[i]}"
       onkeyup="updateFormIcon(event)" class="formitem-icon"><i id="formIconSample">
       </i><br><a href="https://material.io/icons" target="_blank">
@@ -399,6 +400,9 @@ function prompterBefore(e) {
     }
     else if(child.className == "checkbox"){
       result[child.getAttribute('name')] = child.children[0].checked
+    }
+    else if(child.type == "file"){
+      result[child.getAttribute('name')] = child
     }
     else if(child.className == 'color-outer'){
       child.childNodes.forEach((label) => {
@@ -603,13 +607,30 @@ function changeTaskDate(e, date, group, task, container=currentPage){
 }
 
 function backupData(){
-  var link = document.createElement("a");
-  link.download = 'todoka_backup.json';
-  link.href = 'data:text/plain,'+JSON.stringify(userData);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  delete link;
+  download('todoka-backup.json', JSON.stringify(userData))
+
+  function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+}
+
+function restoreData(input, func){
+  var reader = new FileReader();
+  reader.onload = function(){
+    var text = reader.result;
+    func(text)
+  };
+  if(input.files[0])
+  reader.readAsText(input.files[0]);
 }
 
 function minimizeGroup(e, group){
@@ -638,10 +659,46 @@ function deleteGroup(group, container=currentPage){
 }
 
 function openOptions(){
+  console.log(userData.theme);
+  var themeOption = userData.theme ? userData.theme.charAt(0) : 1
   prompter({
     h1: 'Options',
-    html: '<button onclick="backupData()">Backup Database</button>'
-  }, console.log)
+    html: '<button onclick="backupData()">Save Data</button>',
+    h2: 'Inport Data',
+    fileInput: 'restoreFile',
+    filter: {
+      label: "Select a filter theme",
+      type: "radio",
+      options: [
+        {text:"Default",value:"1none",default:themeOption == 1},
+        {text:"Darker",value:"2contrast(140%) grayscale(60.1%)",default:themeOption == 2},
+        {text:"White",value:"3invert(100%) hue-rotate(150deg) sepia(35%)",default:themeOption == 3},
+        {text:"Green",value:"4hue-rotate(183deg) sepia(50%)",default:themeOption == 4},
+        {text:"Orange",value:"5hue-rotate(123deg) sepia(50%)",default:themeOption == 5},
+        {text:"Neutral",value:"6hue-rotate(149deg) sepia(89%) grayscale(40%)",default:themeOption == 6},
+      ]
+    },
+  }, (result) => {
+    setTheme(result.filter);
+    restoreData(result.restoreFile, (result) => {
+      prompter({
+        h1: 'Are you sure?',
+        p: 'Are you sure you want to import this data as this will overide \
+        existing data with the new data. You should backup Your data just in case',
+        html: '<button onclick="backupData()">Backup Data</button>',
+      }, () => {
+        userData = JSON.parse(result);
+        setData();
+        window.location.reload(false);
+      })
+    })
+  })
+}
+
+function setTheme(filter=userData.theme){
+  $('body').style.filter = filter.substr(1);
+  userData.theme = filter;
+  setData();
 }
 
 function openSidebar(){

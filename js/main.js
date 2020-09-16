@@ -2,6 +2,7 @@
 updateSidebar();
 page(-1)
 openSidebar();
+setTheme();
 
 if(!localStorage.getItem('todoka'))window.location = 'start/'
 

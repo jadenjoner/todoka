@@ -84,7 +84,9 @@ i {
 
   button,
   input[type="button"],
-  input[type="submit"], input.button {
+  input[type="submit"],
+  input.button,
+  input[type="file"] {
     background: $black2;
     border: 2px solid $black0;
     padding: 8px 16px;
@@ -94,7 +96,6 @@ i {
     margin-bottom: 4px;
     transition: 0.2s;
     margin-bottom: 8px;
-
     &:hover {
       cursor: pointer;
       background: $black4;
@@ -107,6 +108,10 @@ i {
       border-color: $theme;
       color: $white0;
     }
+  }
+  input[type="file"]{
+    padding-left: -50px !important;
+
   }
 
   input[type="text"],
