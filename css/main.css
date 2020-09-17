@@ -954,6 +954,18 @@ main .center .checkbox input:checked ~ .checkmark {
   position: relative;
   top: 12px;
   margin-left: 10px;
+  transition: 0.2s;
+}
+.popup .box .center #formIconSample:hover, .popup2 .box .center #formIconSample:hover {
+  border-color: #5b48e9;
+  color: #d2d5de;
+  cursor: pointer;
+}
+.popup .box .center #formIconSample:active, .popup2 .box .center #formIconSample:active {
+  transition: 0s;
+  background: #5b48e9;
+  border-color: #5b48e9;
+  color: #efefef;
 }
 .popup .box .center .iconlist, .popup2 .box .center .iconlist {
   display: flex;

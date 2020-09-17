@@ -345,8 +345,9 @@ function prompter(a, func){
       case tager('fileInput',i): result += `<input type="file" name="${a[i]}">`
       case 'selectIcon': result += `<br><br>
       <button onclick="iconPopup(updateFormIconText)" style="padding: 3px 6px;margin-bottom:0">Select Icon</button>
-      <br><input type="text" placeholder="${a[i]}"
-      onkeyup="updateFormIcon(event)" class="formitem-icon"><i id="formIconSample"></i><br>`; break;
+      <br><input style="width:200px" type="text" placeholder="${a[i]}"
+      onkeyup="updateFormIcon(event)" class="formitem-icon"><i id="formIconSample"
+      onclick="iconPopup(updateFormIconText)">search</i><br>`; break;
       default: result += `<input type="text" placeholder="${a[i]}"
        class="formitem-${i}" ${a.setDefaultValues ? `value="${a[i]}"` : ''}>`; break;
     }
@@ -443,7 +444,7 @@ function closePopup(e){
 function addContainer(){
   prompter({
     h1: "Creat new catagory",
-    name: "Catagory Name ex: work",
+    name: "Catagory Name ex school",
     selectIcon: "Icon"
   }, (result) => {
     userData.tasks = [...userData.tasks, {

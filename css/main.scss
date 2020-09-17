@@ -653,7 +653,19 @@ main {
         overflow: hidden;
         position: relative;
         top: 12px;
-        margin-left: 10px
+        margin-left: 10px;
+        transition: 0.2s;
+        &:hover{
+          border-color: $theme;
+          color: $white1;
+          cursor: pointer;
+        }
+        &:active{
+          transition: 0s;
+          background: $theme;
+          border-color: $theme;
+          color: $white0;
+        }
       }
 
       .iconlist{
