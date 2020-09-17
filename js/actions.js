@@ -13,7 +13,6 @@ var homePageHTML =
 <div class="start-here"><i>arrow_back</i><span>Start Here</span></div>
 `
 
-
 function getData() {
   if(localStorage.getItem('taskData') == null)setData({tasks: []});
   return JSON.parse(localStorage.getItem('taskData'));
@@ -470,7 +469,8 @@ function closePopup(e){
 function addContainer(){
   prompter({
     h1: "Create new category",
-    name: "category Name ex school",
+    name: "category Name",
+    p: "ex. School, Work, Projects",
     selectIcon: "Icon"
   }, (result) => {
     userData.tasks = [...userData.tasks, {
@@ -488,6 +488,7 @@ function addGroup(container=currentPage){
   prompter({
     h1: "Add Group",
     name: "Group Name",
+    p: "ex. Math class, Emails, My project",
     selectIcon: "Icon",
     color: "color (optional)",
   }, (result) => {
