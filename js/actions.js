@@ -82,6 +82,7 @@ function page(number=currentPage){
         }}),
       }})
   })
+  setTheme()
 }
 
 function createHomePage(){
@@ -128,7 +129,6 @@ function createHomePage(){
     })));
     results.push(result);
   });
-  console.log(results.filter(a=>a.length))
   if(results.filter(a=>a.length).length == 0){
     $('main .center').innerHTML = homePageHTML
     return;
@@ -224,18 +224,20 @@ function createHomePage(){
   $('main .center').innerHTML = homeTemplate({
     groups: groups,
   })
+
+  setTheme()
 }
 
 function pageTemplate(arr){
   return repit(`
     <h1>{title}</h1>
-    <button onclick="deleteContainer()">Remove Catagory</button>
+    <button onclick="deleteContainer()">Remove category</button>
     <br>
     <br>
     {for groups}
     <div class="group">
       <div class="top">
-        <i class="icon" style="color: {groupColor}">{groupIcon}
+        <i class="icon uninvert" style="color: {groupColor}">{groupIcon}
         </i>
         <span class="group-name">{groupName}</span>
         <span class="info">{groupInfo}</span>
@@ -273,7 +275,8 @@ function pageTemplate(arr){
     <i class="add">add</i>
     </div>
     `, arr);
-  }
+
+}
 
 function homeTemplate(arr){
   return repit(`
@@ -294,7 +297,7 @@ function homeTemplate(arr){
           onclick="checkTheBox(event, '{groupNumber2}', '{taskNumber}', '{page}')">
           check_box_outline_blank</i>
           <i style="opacity:0.5" onclick="page('{page}')">{pageIcon}</i>
-          <i style="opacity:0.5;color:{taskIconColor}" onclick="page('{page}')">{taskIcon}</i>
+          <i class="uninvert" style="opacity:0.5;color:{taskIconColor}" onclick="page('{page}')">{taskIcon}</i>
           <span class="task-name">{priority} {taskName}</span>
           <span class="info">{pageName} - {groupName2}</span>
           <div class="right">
@@ -330,6 +333,7 @@ function generateInfo(time, effort){
 }
 
 function prompter(a, func){
+
   var result = ''
   function tager(text, c){
     return (c.match(RegExp(`^${text}[0-9]?[0-9]?$`))||{}).input;
@@ -377,10 +381,11 @@ function prompter(a, func){
   prompterAfter = func
   $('.popup .center').innerHTML = result;
   $('.popup').style.display = 'flex'
+  setTheme();
 }
 
 function generateColorPicker() {
-  var result = '<div class="color-outer">'
+  var result = '<div class="color-outer uninvert">'
   var colors = ['#d44', '#d84', '#dd4', '#4d4', '#4dd', '#44d', '#84d', '']
   colors.forEach(color => {
     result += `<br><label name="color" class="radio">
@@ -410,7 +415,7 @@ function prompterBefore(e) {
     else if(child.type == "file"){
       result[child.getAttribute('name')] = child
     }
-    else if(child.className == 'color-outer'){
+    else if(child.className == 'color-outer uninvert'){
       child.childNodes.forEach((label) => {
         if(label.children.length && label.children[0].checked)
           result.color = label.children[0].value;
@@ -443,8 +448,8 @@ function closePopup(e){
 
 function addContainer(){
   prompter({
-    h1: "Creat new catagory",
-    name: "Catagory Name ex school",
+    h1: "Create new category",
+    name: "category Name ex school",
     selectIcon: "Icon"
   }, (result) => {
     userData.tasks = [...userData.tasks, {
@@ -471,6 +476,7 @@ function addGroup(container=currentPage){
       color: result.color,
       tasks: [],
     }]
+    console.log(result.color)
     page(currentPage);
     setData();
   })
@@ -478,7 +484,7 @@ function addGroup(container=currentPage){
 
 function deleteContainer(container=currentPage){
   prompter({
-    h2: 'Are you sure you want to delete '+userData.tasks[currentPage].name+" catagory",
+    h2: 'Are you sure you want to delete '+userData.tasks[currentPage].name+" category",
   }, (result) => {
     userData.tasks.splice(currentPage, 1);
     updateSidebar();
@@ -562,11 +568,10 @@ function editTask(group, task, container=currentPage){
       label: "How long will this task take?",
       type: "radio",
       options: [
-        {text:"Not long",value:"1",default:taskData.time==1},
-        {text:"Around half an hour",value:"2",default:taskData.time==2},
-        {text:"A good amount of time",value:"3",default:taskData.time==3},
-        {text:"This is an event",value:"4",default:taskData.time==4},
-        {text:"This is a reminder",value:"5",default:taskData.time==5},
+        {text:"Less than half an hour",value:"1",default:taskData.time==1},
+        {text:"Half an hour to an hour",value:"2",default:taskData.time==2},
+        {text:"Mor than a couple hours",value:"3",default:taskData.time==3},
+        {text:"All day event",value:"4",default:taskData.time==4},
       ]
     },
     effort: {
@@ -716,6 +721,23 @@ function setTheme(filter=userData.theme){
   if(!userData.theme)return;
   $('body').style.filter = filter.substr(1);
   userData.theme = filter;
+  var hueRotation = filter.match(/hue-rotate\((.+?)deg\)/)
+  hueRotation = hueRotation ? 360-hueRotation[1] : 0
+  var invert = filter.match(/invert\((.+?)%\)/)
+  invert = invert ? invert[1] : 0
+  console.log('hue-rotate', hueRotation)
+  console.log('invert', invert)
+  $$('.uninvert').styles({
+    filter: `hue-rotate(${hueRotation}deg) invert(${invert}%)`
+  })
+  $$('.justuninvert').styles({
+    filter: `invert(${invert}%)`
+  })
+  $$('.uninvert').forEach(el => {
+    if(el.style.color == '' && invert > 50)el.style.color = '#557';
+    else if(el.style.color == 'rgb(221, 221, 68)' && invert > 50)
+      el.style.color = '#b0a114'
+  })
   setData();
 }
 
