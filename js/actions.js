@@ -715,7 +715,6 @@ function openOptions(){
       })
     })
     setTheme(result.filter);
-    window.location.reload(false);
   })
 }
 
@@ -756,6 +755,12 @@ function setTheme(filter=userData.theme){
     $$('.group').styles({
       borderColor: '#557',
       backgroundColor: '#224',
+    });
+  }else{
+    $('aside').style.boxShadow = '';
+    $$('.group').styles({
+      borderColor: '',
+      backgroundColor: '',
     });
   }
   setData();
