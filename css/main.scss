@@ -22,11 +22,9 @@ $white6: #565c81; // Global
   box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: $white3 #0000;
-}
-
-html {
   font-family: Ubuntu,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
+
 body{
   background: $black5;
 }
@@ -54,6 +52,10 @@ i {
 ::selection {
   background: $white0;
   color: $theme;
+}
+::placeholder{
+  color: $white2;
+  opacity: 0.5;
 }
 
 .clear {
@@ -92,9 +94,11 @@ i {
     border-radius: 8px;
     color: $white2;
     font-weight: 500;
+    font-size: 17px;
     margin-bottom: 4px;
     transition: 0.2s;
     margin-bottom: 8px;
+    outline: none;
     &:hover {
       cursor: pointer;
       background: $black4;
@@ -107,10 +111,12 @@ i {
       border-color: $theme;
       color: $white0;
     }
+    &:focus{
+      border-color: $theme;
+    }
   }
   input[type="file"]{
     padding-left: -50px !important;
-
   }
 
   input[type="text"],
@@ -122,6 +128,8 @@ i {
     border-radius: 8px;
     padding: 8px 16px;
     color: $white2;
+    font-size: 17px;
+    outline: none;
 
     &:focus {
       border-color: $theme;
