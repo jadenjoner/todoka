@@ -74,9 +74,7 @@ i {
   clear: both;
 }
 @mixin content {
-  .middle{
-    text-align: center;
-  }
+
   h1 {
     font-size: 40px;
     font-weight: 500;
@@ -343,7 +341,45 @@ i {
         margin-bottom: 0;
       }
     }
+
+
+
   }
+
+
+  .middle{
+    text-align: center;
+  }
+
+  .start-here{
+    display: none;
+    color: #d44;
+    position: fixed;
+    top: 4px;
+    left: 287px;
+    font-size: 28px;
+    user-select: none;
+    i{
+      font-size:34px;
+      float: left;
+    }
+    span{
+      font-weight: 500;
+    }
+  }
+  .start-here.second{
+    position: static;
+  }
+  .start-here.third{
+    position: relative;
+    float: right;
+    left: -10px;
+    top: -100px;
+    i{
+      float: right;
+    }
+  }
+
   .color-outer{
     display: flex;
     margin-bottom: 20px;

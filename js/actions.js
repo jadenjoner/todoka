@@ -9,7 +9,9 @@ var homePageHTML =
   <a href="start"><button style="position:relative;top:-40px">Todoka Start Page</button></a>
 </div>
 <br>
-<img style="width:100%;border-radius:8px;border:2px solid #5b48e9" src="img/todoka-guide.gif"/>`
+<img style="width:100%;border-radius:8px;border:2px solid #5b48e9" src="img/todoka-guide.gif"/>
+<div class="start-here"><i>arrow_back</i><span>Start Here</span></div>
+`
 
 
 function getData() {
@@ -61,6 +63,8 @@ function page(number=currentPage){
       createHomePage();
     else {
       $('main .center').innerHTML = homePageHTML
+      if(!userData.tutorialEnd)
+        $('.start-here').style.display = 'block';
     }
     updateSidebar(userData, number)
     return;
@@ -88,6 +92,17 @@ function page(number=currentPage){
       }})
   })
   setTheme()
+
+  if(userData.tasks.length == 1 && number == 0 && !userData.tutorialEnd){
+    if(!userData.tasks[0].groups.length)
+      $('.start-here.second').style.display = 'block';
+    else if(userData.tasks[0].groups[0].tasks.length == 0)
+      $('.start-here.third').style.display = 'block';
+    else {
+      userData.tutorialEnd = true;
+      setData();
+    }
+  }
 }
 
 function createHomePage(){
@@ -279,8 +294,9 @@ function pageTemplate(arr){
     <div onclick="addGroup()" class="group add">
     <i class="add">add</i>
     </div>
+    <div class="start-here second"><i>arrow_upward</i><span>Create new group</span></div>
+    <div class="start-here third"><span>Add new task</span><i>arrow_upward</i></div>
     `, arr);
-
 }
 
 function homeTemplate(arr){
@@ -691,8 +707,6 @@ function openOptions(){
   prompter({
     setDefaultValues: true,
     h1: 'Options',
-    h21: 'Name',
-    name: '',
     h22: 'Export Data',
     html: '<br><button onclick="backupData()">Export</button>',
     h23: 'Import Data',

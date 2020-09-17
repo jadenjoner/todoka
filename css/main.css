@@ -186,9 +186,6 @@ main .center {
   font-size: 20px;
   padding: 16px 20px 0;
 }
-main .center .middle {
-  text-align: center;
-}
 main .center h1 {
   font-size: 40px;
   font-weight: 500;
@@ -442,6 +439,37 @@ main .center .group .tasks > div .right i[selected=true] {
 main .center .group .tasks > div:last-child {
   margin-bottom: 0;
 }
+main .center .middle {
+  text-align: center;
+}
+main .center .start-here {
+  display: none;
+  color: #d44;
+  position: fixed;
+  top: 4px;
+  left: 287px;
+  font-size: 28px;
+  user-select: none;
+}
+main .center .start-here i {
+  font-size: 34px;
+  float: left;
+}
+main .center .start-here span {
+  font-weight: 500;
+}
+main .center .start-here.second {
+  position: static;
+}
+main .center .start-here.third {
+  position: relative;
+  float: right;
+  left: -10px;
+  top: -100px;
+}
+main .center .start-here.third i {
+  float: right;
+}
 main .center .color-outer {
   display: flex;
   margin-bottom: 20px;
@@ -578,9 +606,6 @@ main .center .checkbox input:checked ~ .checkmark {
   padding: 20px;
   color: #b6bbc9;
   text-align: left;
-}
-.popup .box .center .middle, .popup2 .box .center .middle {
-  text-align: center;
 }
 .popup .box .center h1, .popup2 .box .center h1 {
   font-size: 40px;
@@ -852,6 +877,37 @@ main .center .checkbox input:checked ~ .checkmark {
 }
 .popup .box .center .group .tasks > div:last-child, .popup2 .box .center .group .tasks > div:last-child {
   margin-bottom: 0;
+}
+.popup .box .center .middle, .popup2 .box .center .middle {
+  text-align: center;
+}
+.popup .box .center .start-here, .popup2 .box .center .start-here {
+  display: none;
+  color: #d44;
+  position: fixed;
+  top: 4px;
+  left: 287px;
+  font-size: 28px;
+  user-select: none;
+}
+.popup .box .center .start-here i, .popup2 .box .center .start-here i {
+  font-size: 34px;
+  float: left;
+}
+.popup .box .center .start-here span, .popup2 .box .center .start-here span {
+  font-weight: 500;
+}
+.popup .box .center .start-here.second, .popup2 .box .center .start-here.second {
+  position: static;
+}
+.popup .box .center .start-here.third, .popup2 .box .center .start-here.third {
+  position: relative;
+  float: right;
+  left: -10px;
+  top: -100px;
+}
+.popup .box .center .start-here.third i, .popup2 .box .center .start-here.third i {
+  float: right;
 }
 .popup .box .center .color-outer, .popup2 .box .center .color-outer {
   display: flex;
