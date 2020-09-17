@@ -186,6 +186,9 @@ main .center {
   font-size: 20px;
   padding: 16px 20px 0;
 }
+main .center .middle {
+  text-align: center;
+}
 main .center h1 {
   font-size: 40px;
   font-weight: 500;
@@ -575,6 +578,9 @@ main .center .checkbox input:checked ~ .checkmark {
   padding: 20px;
   color: #b6bbc9;
   text-align: left;
+}
+.popup .box .center .middle, .popup2 .box .center .middle {
+  text-align: center;
 }
 .popup .box .center h1, .popup2 .box .center h1 {
   font-size: 40px;

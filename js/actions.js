@@ -3,7 +3,12 @@ var prompterAfter;
 var iconAfter;
 var currentPage = 0;
 var homePageHTML =
-`<img style="width:100%" src="img/todoka-title.svg"/><br>
+`<img style="width:100%" src="img/todoka-title.svg"/>
+<div class="middle">
+  <button onclick="downloadApp()" style="position:relative;top:-40px">Download Todoka</button>
+  <a href="start"><button style="position:relative;top:-40px">Todoka Start Page</button></a>
+</div>
+<br>
 <img style="width:100%;border-radius:8px;border:2px solid #5b48e9" src="img/todoka-guide.gif"/>`
 
 
@@ -352,7 +357,7 @@ function prompter(a, func){
       <br><input style="width:200px" type="text" placeholder="${a[i]}"
       onkeyup="updateFormIcon(event)" class="formitem-icon"><i id="formIconSample"
       onclick="iconPopup(updateFormIconText)">search</i><br>`; break;
-      default: result += `<input type="text" placeholder="${a[i]}"
+      default: result += `<input type="text" placeholder="${a.setDefaultValues ? i : a[i]}"
        class="formitem-${i}" ${a.setDefaultValues ? `value="${a[i]}"` : ''}>`; break;
     }
     else {
@@ -684,9 +689,10 @@ function openOptions(){
   console.log(userData.theme);
   var themeOption = userData.theme ? userData.theme.charAt(0) : 1
   prompter({
+    setDefaultValues: true,
     h1: 'Options',
     h21: 'Name',
-    name: 'name',
+    name: '',
     h22: 'Export Data',
     html: '<br><button onclick="backupData()">Export</button>',
     h23: 'Import Data',
@@ -705,6 +711,7 @@ function openOptions(){
       ]
     },
   }, (result) => {
+    userData.name = result.name;
     restoreData(result.restoreFile, (result) => {
       prompter({
         h1: 'Are you sure?',
@@ -718,6 +725,7 @@ function openOptions(){
       })
     })
     setTheme(result.filter);
+    setData();
   })
 }
 
@@ -733,7 +741,7 @@ function downloadApp(){
       <li>Drag and drop the todoka.crx file onto the page</li>
     </ol>
     <br>
-    <img class="uninvert" src="appi1.png" style="width:100%">
+    <img class="uninvert" src="img/appi1.png" style="width:100%">
   `)
   setTheme();
 }

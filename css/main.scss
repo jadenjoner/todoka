@@ -74,6 +74,9 @@ i {
   clear: both;
 }
 @mixin content {
+  .middle{
+    text-align: center;
+  }
   h1 {
     font-size: 40px;
     font-weight: 500;
@@ -96,7 +99,7 @@ i {
   }
 
   ul, ol{
-    margin-left: 20px; 
+    margin-left: 20px;
   }
 
   button,
