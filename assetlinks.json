@@ -1,8 +1,0 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "tk.todoka.twa",
-    "sha256_cert_fingerprints": ["C7:00:A7:D5:67:AE:88:0B:65:3B:65:46:B3:CD:05:5A:A0:83:16:AA:43:B2:89:2C:47:1C:7A:45:3B:5B:6A:F5"]
-  }
-}]
