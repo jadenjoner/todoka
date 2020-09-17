@@ -497,7 +497,6 @@ function addGroup(container=currentPage){
       color: result.color,
       tasks: [],
     }]
-    console.log(result.color)
     page(currentPage);
     setData();
   })
@@ -694,7 +693,6 @@ function deleteGroup(group, container=currentPage){
   prompter({
     h2: 'Are you sure you want to remove group '+groupObj.name,
   }, () => {
-    console.log(group);
     userData.tasks[container].groups.splice(group, 1);
     page();
     setData();
@@ -702,7 +700,6 @@ function deleteGroup(group, container=currentPage){
 }
 
 function openOptions(){
-  console.log(userData.theme);
   var themeOption = userData.theme ? userData.theme.charAt(0) : 1
   prompter({
     setDefaultValues: true,
@@ -772,8 +769,6 @@ function setTheme(filter=userData.theme){
   hueRotation = hueRotation ? 360-hueRotation[1] : 0
   var invert = filter.match(/invert\((.+?)%\)/)
   invert = invert ? invert[1] : 0
-  console.log('hue-rotate', hueRotation)
-  console.log('invert', invert)
   $$('.uninvert').styles({
     filter: `hue-rotate(${hueRotation}deg) invert(${invert}%)`
   })
