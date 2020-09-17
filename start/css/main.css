@@ -107,11 +107,12 @@ main .center button {
   background: #212945;
   border: 2px solid #191d31;
   color: #9ea3bb;
-  padding: 10px 20px;
+  padding: 15px 30px;
+  margin-bottom: 80px;
   border-radius: 8px;
   margin: 20px auto;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 28px;
 }
 main .center button:hover {
   transition: 0.2s;
