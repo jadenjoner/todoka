@@ -58,6 +58,18 @@ i {
   opacity: 0.5;
 }
 
+::-webkit-scrollbar {
+ width: 6px;
+}
+::-webkit-scrollbar-track {
+ background: #0000;
+ margin: 2px 0;
+}
+::-webkit-scrollbar-thumb {
+ background: $white3;
+}
+
+
 .clear {
   clear: both;
 }
@@ -591,7 +603,13 @@ main {
   }
 }
 
-.popup {
+.popup2{
+  .box{
+    width: 500px !important;
+  }
+}
+
+.popup, .popup2 {
   z-index: 1010 !important;
   position: fixed;
   top: 0;
@@ -636,6 +654,30 @@ main {
         position: relative;
         top: 12px;
         margin-left: 10px
+      }
+
+      .iconlist{
+        display: flex;
+        flex-wrap: wrap;
+
+        i{
+          margin: 2px;
+          padding: 6px;
+          font-size: 30px;
+          color: $white3;
+          border-radius: 4px;
+          transition: 0.2s;
+        }
+        i:hover{
+          background: #fff1;
+          cursor: pointer;
+          color: $white1;
+        }
+        i:active{
+          transition: 0s;
+          color: $white0;
+          background: $theme;
+        }
       }
     }
   }

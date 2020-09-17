@@ -41,6 +41,19 @@ i {
   opacity: 0.5;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0000;
+  margin: 2px 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9ea3bb;
+}
+
 .clear {
   clear: both;
 }
@@ -525,7 +538,11 @@ main .center .checkbox input:checked ~ .checkmark {
   border-color: #5b48e9;
 }
 
-.popup {
+.popup2 .box {
+  width: 500px !important;
+}
+
+.popup, .popup2 {
   z-index: 1010 !important;
   position: fixed;
   top: 0;
@@ -537,7 +554,7 @@ main .center .checkbox input:checked ~ .checkmark {
   display: none;
   align-items: center;
 }
-.popup .box {
+.popup .box, .popup2 .box {
   width: 600px;
   max-width: 100%;
   max-height: 90vh;
@@ -548,7 +565,7 @@ main .center .checkbox input:checked ~ .checkmark {
   text-align: center;
   overflow-y: auto;
 }
-.popup .box .center {
+.popup .box .center, .popup2 .box .center {
   max-width: 100%;
   width: 500px;
   margin: 0 auto;
@@ -556,20 +573,20 @@ main .center .checkbox input:checked ~ .checkmark {
   color: #b6bbc9;
   text-align: left;
 }
-.popup .box .center h1 {
+.popup .box .center h1, .popup2 .box .center h1 {
   font-size: 40px;
   font-weight: 500;
   margin-bottom: 10px;
   text-transform: capitalize;
 }
-.popup .box .center h2 {
+.popup .box .center h2, .popup2 .box .center h2 {
   border-left: 3px solid #5b48e9;
   padding-left: 8px;
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 6px;
 }
-.popup .box .center a {
+.popup .box .center a, .popup2 .box .center a {
   color: #9ea3bb;
   text-decoration: underline;
   margin-bottom: 8px;
@@ -578,7 +595,11 @@ main .center .checkbox input:checked ~ .checkmark {
 .popup .box .center input[type=button],
 .popup .box .center input[type=submit],
 .popup .box .center input.button,
-.popup .box .center input[type=file] {
+.popup .box .center input[type=file], .popup2 .box .center button,
+.popup2 .box .center input[type=button],
+.popup2 .box .center input[type=submit],
+.popup2 .box .center input.button,
+.popup2 .box .center input[type=file] {
   background: #191d31;
   border: 2px solid #090b1d;
   padding: 8px 16px;
@@ -595,7 +616,11 @@ main .center .checkbox input:checked ~ .checkmark {
 .popup .box .center input[type=button]:hover,
 .popup .box .center input[type=submit]:hover,
 .popup .box .center input.button:hover,
-.popup .box .center input[type=file]:hover {
+.popup .box .center input[type=file]:hover, .popup2 .box .center button:hover,
+.popup2 .box .center input[type=button]:hover,
+.popup2 .box .center input[type=submit]:hover,
+.popup2 .box .center input.button:hover,
+.popup2 .box .center input[type=file]:hover {
   cursor: pointer;
   background: #212945;
   border-color: #5b48e9;
@@ -604,7 +629,11 @@ main .center .checkbox input:checked ~ .checkmark {
 .popup .box .center input[type=button]:active,
 .popup .box .center input[type=submit]:active,
 .popup .box .center input.button:active,
-.popup .box .center input[type=file]:active {
+.popup .box .center input[type=file]:active, .popup2 .box .center button:active,
+.popup2 .box .center input[type=button]:active,
+.popup2 .box .center input[type=submit]:active,
+.popup2 .box .center input.button:active,
+.popup2 .box .center input[type=file]:active {
   transition: 0s;
   background: #5b48e9;
   border-color: #5b48e9;
@@ -614,14 +643,19 @@ main .center .checkbox input:checked ~ .checkmark {
 .popup .box .center input[type=button]:focus,
 .popup .box .center input[type=submit]:focus,
 .popup .box .center input.button:focus,
-.popup .box .center input[type=file]:focus {
+.popup .box .center input[type=file]:focus, .popup2 .box .center button:focus,
+.popup2 .box .center input[type=button]:focus,
+.popup2 .box .center input[type=submit]:focus,
+.popup2 .box .center input.button:focus,
+.popup2 .box .center input[type=file]:focus {
   border-color: #5b48e9;
 }
-.popup .box .center input[type=file] {
+.popup .box .center input[type=file], .popup2 .box .center input[type=file] {
   padding-left: -50px !important;
 }
 .popup .box .center input[type=text],
-.popup .box .center input[type=number] {
+.popup .box .center input[type=number], .popup2 .box .center input[type=text],
+.popup2 .box .center input[type=number] {
   width: 250px;
   margin-bottom: 8px;
   background: #212945;
@@ -633,48 +667,49 @@ main .center .checkbox input:checked ~ .checkmark {
   outline: none;
 }
 .popup .box .center input[type=text]:focus,
-.popup .box .center input[type=number]:focus {
+.popup .box .center input[type=number]:focus, .popup2 .box .center input[type=text]:focus,
+.popup2 .box .center input[type=number]:focus {
   border-color: #5b48e9;
 }
-.popup .box .center p {
+.popup .box .center p, .popup2 .box .center p {
   margin-bottom: 8px;
 }
-.popup .box .center .group.add {
+.popup .box .center .group.add, .popup2 .box .center .group.add {
   padding: 0;
   background: #1c274f;
   border-color: transparent;
   transition: 0.2s;
 }
-.popup .box .center .group.add:hover {
+.popup .box .center .group.add:hover, .popup2 .box .center .group.add:hover {
   cursor: pointer;
   border-color: #5b48e9;
 }
-.popup .box .center .group.add:hover i {
+.popup .box .center .group.add:hover i, .popup2 .box .center .group.add:hover i {
   transition: 0.2s;
   color: #d2d5de;
 }
-.popup .box .center .group.add:active {
+.popup .box .center .group.add:active, .popup2 .box .center .group.add:active {
   transition: 0s;
   border-color: #5b48e9;
   background: #5b48e9;
 }
-.popup .box .center .group.add:active i {
+.popup .box .center .group.add:active i, .popup2 .box .center .group.add:active i {
   color: #efefef;
 }
-.popup .box .center .group.minimize {
+.popup .box .center .group.minimize, .popup2 .box .center .group.minimize {
   padding: 5px;
 }
-.popup .box .center .group.minimize .top {
+.popup .box .center .group.minimize .top, .popup2 .box .center .group.minimize .top {
   border-color: transparent;
   margin-bottom: 0;
 }
-.popup .box .center .group.minimize .top .add {
+.popup .box .center .group.minimize .top .add, .popup2 .box .center .group.minimize .top .add {
   margin: 4px;
 }
-.popup .box .center .group.minimize .tasks {
+.popup .box .center .group.minimize .tasks, .popup2 .box .center .group.minimize .tasks {
   display: none;
 }
-.popup .box .center .group {
+.popup .box .center .group, .popup2 .box .center .group {
   overflow: hidden;
   background: #25315b;
   border: 3px solid #1c274f;
@@ -683,39 +718,39 @@ main .center .checkbox input:checked ~ .checkmark {
   margin-bottom: 16px;
   text-align: center;
 }
-.popup .box .center .group i.add {
+.popup .box .center .group i.add, .popup2 .box .center .group i.add {
   margin: 0 auto;
   font-size: 36px;
   color: #9ea3bb;
 }
-.popup .box .center .group .top {
+.popup .box .center .group .top, .popup2 .box .center .group .top {
   text-align: left;
   border-bottom: 2px solid #565c81;
   padding-bottom: 8px;
   margin-bottom: 4px;
   padding-left: 4px;
 }
-.popup .box .center .group .top .icon {
+.popup .box .center .group .top .icon, .popup2 .box .center .group .top .icon {
   font-size: 26px;
   position: relative;
   top: 7px;
   color: #9ea3bb;
 }
-.popup .box .center .group .top .group-name {
+.popup .box .center .group .top .group-name, .popup2 .box .center .group .top .group-name {
   font-size: 22px;
   font-weight: 500;
   margin-right: 8px;
 }
-.popup .box .center .group .top .info {
+.popup .box .center .group .top .info, .popup2 .box .center .group .top .info {
   font-size: 16px;
   color: #8a90aa;
 }
 @media (max-width: 800px) {
-  .popup .box .center .group .top .info {
+  .popup .box .center .group .top .info, .popup2 .box .center .group .top .info {
     display: none;
   }
 }
-.popup .box .center .group .top .add {
+.popup .box .center .group .top .add, .popup2 .box .center .group .top .add {
   float: right;
   font-size: 28px;
   color: #9ea3bb;
@@ -724,17 +759,17 @@ main .center .checkbox input:checked ~ .checkmark {
   transition: 0.2s;
   border-radius: 30px;
 }
-.popup .box .center .group .top .add:hover {
+.popup .box .center .group .top .add:hover, .popup2 .box .center .group .top .add:hover {
   cursor: pointer;
   color: #b6bbc9;
   background: #fff1;
 }
-.popup .box .center .group .top .add:active {
+.popup .box .center .group .top .add:active, .popup2 .box .center .group .top .add:active {
   transition: 0s;
   background: #5b48e9;
   color: #efefef;
 }
-.popup .box .center .group .tasks > div {
+.popup .box .center .group .tasks > div, .popup2 .box .center .group .tasks > div {
   display: flex;
   align-items: center;
   position: relative;
@@ -742,40 +777,40 @@ main .center .checkbox input:checked ~ .checkmark {
   transition: 1s;
   user-select: none;
 }
-.popup .box .center .group .tasks > div > i {
+.popup .box .center .group .tasks > div > i, .popup2 .box .center .group .tasks > div > i {
   font-size: 22px;
   margin-right: 4px;
   padding-left: 0;
   color: #9ea3bb;
 }
-.popup .box .center .group .tasks > div > i:hover {
+.popup .box .center .group .tasks > div > i:hover, .popup2 .box .center .group .tasks > div > i:hover {
   color: #b6bbc9;
   background: #fff1;
   cursor: pointer;
   border-radius: 4px;
 }
-.popup .box .center .group .tasks > div > i:active {
+.popup .box .center .group .tasks > div > i:active, .popup2 .box .center .group .tasks > div > i:active {
   background: #5b48e9;
 }
-.popup .box .center .group .tasks > div .task-name {
+.popup .box .center .group .tasks > div .task-name, .popup2 .box .center .group .tasks > div .task-name {
   font-size: 20px;
   color: #b6bbc9;
   margin-right: 8px;
 }
-.popup .box .center .group .tasks > div .info {
+.popup .box .center .group .tasks > div .info, .popup2 .box .center .group .tasks > div .info {
   color: #8a90aa;
   font-size: 16px;
 }
 @media (max-width: 1000px) {
-  .popup .box .center .group .tasks > div .info {
+  .popup .box .center .group .tasks > div .info, .popup2 .box .center .group .tasks > div .info {
     display: none;
   }
 }
-.popup .box .center .group .tasks > div .right {
+.popup .box .center .group .tasks > div .right, .popup2 .box .center .group .tasks > div .right {
   position: absolute;
   right: 0;
 }
-.popup .box .center .group .tasks > div .right i {
+.popup .box .center .group .tasks > div .right i, .popup2 .box .center .group .tasks > div .right i {
   font-size: 24px;
   color: #8a90aa;
   border-radius: 4px;
@@ -783,44 +818,44 @@ main .center .checkbox input:checked ~ .checkmark {
   margin: -2px;
   padding: 2px;
 }
-.popup .box .center .group .tasks > div .right i:hover {
+.popup .box .center .group .tasks > div .right i:hover, .popup2 .box .center .group .tasks > div .right i:hover {
   background: #fff1;
   cursor: pointer;
   color: #b6bbc9;
 }
-.popup .box .center .group .tasks > div .right i:active {
+.popup .box .center .group .tasks > div .right i:active, .popup2 .box .center .group .tasks > div .right i:active {
   transition: 0s;
   background: #5b48e9;
   color: #efefef;
 }
 @media (max-width: 800px) {
-  .popup .box .center .group .tasks > div .right i {
+  .popup .box .center .group .tasks > div .right i, .popup2 .box .center .group .tasks > div .right i {
     display: none;
   }
 }
-.popup .box .center .group .tasks > div .right i[selected=true] {
+.popup .box .center .group .tasks > div .right i[selected=true], .popup2 .box .center .group .tasks > div .right i[selected=true] {
   transition: 0s;
   background: #5b48e9;
   color: #efefef;
 }
-.popup .box .center .group .tasks > div:last-child {
+.popup .box .center .group .tasks > div:last-child, .popup2 .box .center .group .tasks > div:last-child {
   margin-bottom: 0;
 }
-.popup .box .center .color-outer {
+.popup .box .center .color-outer, .popup2 .box .center .color-outer {
   display: flex;
   margin-bottom: 20px;
 }
-.popup .box .center .color-outer .radio[name=color] {
+.popup .box .center .color-outer .radio[name=color], .popup2 .box .center .color-outer .radio[name=color] {
   display: inline !important;
 }
-.popup .box .center .color-outer .radio[name=color] span {
+.popup .box .center .color-outer .radio[name=color] span, .popup2 .box .center .color-outer .radio[name=color] span {
   display: inline !important;
   border-color: #1e2237 !important;
 }
-.popup .box .center .color-outer .radio[name=color] input {
+.popup .box .center .color-outer .radio[name=color] input, .popup2 .box .center .color-outer .radio[name=color] input {
   display: inline !important;
 }
-.popup .box .center .radio {
+.popup .box .center .radio, .popup2 .box .center .radio {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -829,14 +864,14 @@ main .center .checkbox input:checked ~ .checkmark {
   font-size: 18px;
   user-select: none;
 }
-.popup .box .center .radio input {
+.popup .box .center .radio input, .popup2 .box .center .radio input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
 }
-.popup .box .center .radio .checkmark {
+.popup .box .center .radio .checkmark, .popup2 .box .center .radio .checkmark {
   position: absolute;
   top: -2px;
   left: 0;
@@ -847,15 +882,15 @@ main .center .checkbox input:checked ~ .checkmark {
   border-radius: 50%;
   transition: 0.1s;
 }
-.popup .box .center .radio:hover .checkmark {
+.popup .box .center .radio:hover .checkmark, .popup2 .box .center .radio:hover .checkmark {
   transition: 0s;
   border-color: #5b48e9;
 }
-.popup .box .center .radio input:checked ~ .checkmark {
+.popup .box .center .radio input:checked ~ .checkmark, .popup2 .box .center .radio input:checked ~ .checkmark {
   background-color: #212945;
   border: 8px solid #5b48e9;
 }
-.popup .box .center .checkbox {
+.popup .box .center .checkbox, .popup2 .box .center .checkbox {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -864,14 +899,14 @@ main .center .checkbox input:checked ~ .checkmark {
   font-size: 18px;
   user-select: none;
 }
-.popup .box .center .checkbox input {
+.popup .box .center .checkbox input, .popup2 .box .center .checkbox input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
 }
-.popup .box .center .checkbox .checkmark {
+.popup .box .center .checkbox .checkmark, .popup2 .box .center .checkbox .checkmark {
   position: absolute;
   top: -2px;
   left: 0;
@@ -882,10 +917,10 @@ main .center .checkbox input:checked ~ .checkmark {
   border-radius: 4px;
   transition: 0.1s;
 }
-.popup .box .center .checkbox input:checked ~ .checkmark:after {
+.popup .box .center .checkbox input:checked ~ .checkmark:after, .popup2 .box .center .checkbox input:checked ~ .checkmark:after {
   display: block;
 }
-.popup .box .center .checkbox .checkmark:after {
+.popup .box .center .checkbox .checkmark:after, .popup2 .box .center .checkbox .checkmark:after {
   content: "";
   position: absolute;
   display: none;
@@ -899,15 +934,15 @@ main .center .checkbox input:checked ~ .checkmark {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-.popup .box .center .checkbox:hover .checkmark {
+.popup .box .center .checkbox:hover .checkmark, .popup2 .box .center .checkbox:hover .checkmark {
   transition: 0s;
   border-color: #5b48e9;
 }
-.popup .box .center .checkbox input:checked ~ .checkmark {
+.popup .box .center .checkbox input:checked ~ .checkmark, .popup2 .box .center .checkbox input:checked ~ .checkmark {
   background: #5b48e9;
   border-color: #5b48e9;
 }
-.popup .box .center #formIconSample {
+.popup .box .center #formIconSample, .popup2 .box .center #formIconSample {
   background: #212945;
   border: 2px solid #191d31;
   font-size: 28px;
@@ -919,6 +954,28 @@ main .center .checkbox input:checked ~ .checkmark {
   position: relative;
   top: 12px;
   margin-left: 10px;
+}
+.popup .box .center .iconlist, .popup2 .box .center .iconlist {
+  display: flex;
+  flex-wrap: wrap;
+}
+.popup .box .center .iconlist i, .popup2 .box .center .iconlist i {
+  margin: 2px;
+  padding: 6px;
+  font-size: 30px;
+  color: #9ea3bb;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.popup .box .center .iconlist i:hover, .popup2 .box .center .iconlist i:hover {
+  background: #fff1;
+  cursor: pointer;
+  color: #d2d5de;
+}
+.popup .box .center .iconlist i:active, .popup2 .box .center .iconlist i:active {
+  transition: 0s;
+  color: #efefef;
+  background: #5b48e9;
 }
 
 .mobile-menu {

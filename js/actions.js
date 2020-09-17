@@ -1,9 +1,11 @@
 var userData = getData();
 var prompterAfter;
+var iconAfter;
 var currentPage = 0;
 var homePageHTML =
 `<img style="width:100%" src="img/todoka-title.svg"/><br>
 <img style="width:100%;border-radius:8px;border:2px solid #5b48e9" src="img/todoka-guide.gif"/>`
+
 
 function getData() {
   if(localStorage.getItem('taskData') == null)setData({tasks: []});
@@ -341,10 +343,10 @@ function prompter(a, func){
       case 'color': result += generateColorPicker(); break;
       case tager('html',i): result += a[i]; break;
       case tager('fileInput',i): result += `<input type="file" name="${a[i]}">`
-      case 'selectIcon': result += `<input type="text" placeholder="${a[i]}"
-      onkeyup="updateFormIcon(event)" class="formitem-icon"><i id="formIconSample">
-      </i><br><a href="https://material.io/icons" target="_blank">
-      <button style="padding: 3px 6px">Find Icons</button></a><br>`; break;
+      case 'selectIcon': result += `<br><br>
+      <button onclick="iconPopup(updateFormIconText)" style="padding: 3px 6px;margin-bottom:0">Select Icon</button>
+      <br><input type="text" placeholder="${a[i]}"
+      onkeyup="updateFormIcon(event)" class="formitem-icon"><i id="formIconSample"></i><br>`; break;
       default: result += `<input type="text" placeholder="${a[i]}"
        class="formitem-${i}" ${a.setDefaultValues ? `value="${a[i]}"` : ''}>`; break;
     }
@@ -419,13 +421,23 @@ function prompterBefore(e) {
   closePopup();
 }
 
-function updateFormIcon(e){
-  $('#formIconSample').innerText = e.target.value;
+function updateFormIcon(){
+  $('#formIconSample').innerText = $('.formitem-icon').value;
+}
+
+function updateFormIconText(icon){
+  $('.formitem-icon').value = icon
+  updateFormIcon()
 }
 
 function closePopup(e){
-  if(e == undefined)$('.popup').style.display = 'none';
-  else if(e.target.className == 'popup')$('.popup').style.display = 'none';
+  if(e == undefined){
+    $('.popup').style.display = 'none';
+  }
+  else if(e == 2){
+    $('.popup2').style.display = 'none';
+  }
+  else if(e.target.className == 'popup' || e.target.className == 'popup2')event.target.style.display = 'none';
 }
 
 function addContainer(){
@@ -711,4 +723,33 @@ function openSidebar(){
   if(window.innerWidth < 650)
   $('main').style.display = 'none';
   $('.mobile-menu').style.display = 'none';
+}
+
+function popup(html=''){
+  $('.popup2 .box .center').innerHTML = html
+  $('.popup2').style.display = 'flex'
+}
+
+function iconPopup(func){
+  iconAfter = func
+  popup(icons.reduce((a,c) => {
+    return a+`<i title="${c}" onclick="selectIcon('${c}')">${c}</i>`
+  }, '<input type="text" placeholder="Search" onkeyup="iconPopupSearch(this.value)"><br>\
+  <a href="https://material.io/icons" target="_blank">Material Icons</a><div class="iconlist">'))
+}
+
+function iconPopupSearch(search){
+  $('.iconlist').innerHTML = (() => {
+    var filter = icons.filter(i => {
+      if(typeof i == 'string')return i.includes(search)
+    })
+    return filter.reduce((a,c) => {
+      return a+`<i title="${c}" onclick="selectIcon('${c}')">${c}</i>`
+    }, '')
+  })()
+}
+
+function selectIcon(icon){
+  iconAfter(icon);
+  closePopup(2);
 }
