@@ -5,7 +5,7 @@ var currentPage = 0;
 var homePageHTML =
 `<img style="width:100%" src="img/todoka-title.svg"/>
 <div class="middle">
-  <button onclick="downloadApp()" style="position:relative;top:-40px">Download Todoka</button>
+  <button onclick="downloadApp()" style="position:relative;top:-40px">Download Application</button>
   <a href="start"><button style="position:relative;top:-40px">Todoka Start Page</button></a>
 </div>
 <br>
