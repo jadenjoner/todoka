@@ -685,10 +685,13 @@ function openOptions(){
   var themeOption = userData.theme ? userData.theme.charAt(0) : 1
   prompter({
     h1: 'Options',
-    html: '<button onclick="backupData()">Export Data</button>',
-    h2: 'Import Data',
+    h21: 'Name',
+    name: 'name',
+    h22: 'Export Data',
+    html: '<br><button onclick="backupData()">Export</button>',
+    h23: 'Import Data',
     fileInput: 'restoreFile',
-    html2: '<br><br><a href="javascript:void" onclick="downloadApp()" download>Download app to computer</a>',
+    html2: '<br><br><button onclick="downloadApp()">Download app to computer</button>',
     filter: {
       label: "Select a filter theme",
       type: "radio",
@@ -730,8 +733,9 @@ function downloadApp(){
       <li>Drag and drop the todoka.crx file onto the page</li>
     </ol>
     <br>
-    <img src="appi1.png" style="width:100%">
+    <img class="uninvert" src="appi1.png" style="width:100%">
   `)
+  setTheme();
 }
 
 function setTheme(filter=userData.theme){
