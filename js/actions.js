@@ -346,7 +346,7 @@ function prompter(a, func){
       case tager('p',i): result += `<p>${a[i]}</p>`; break;
       case 'color': result += generateColorPicker(); break;
       case tager('html',i): result += a[i]; break;
-      case tager('fileInput',i): result += `<input type="file" name="${a[i]}">`
+      case tager('fileInput',i): result += `<input type="file" name="${a[i]}">`;break;
       case 'selectIcon': result += `<br><br>
       <button onclick="iconPopup(updateFormIconText)" style="padding: 3px 6px;margin-bottom:0">Select Icon</button>
       <br><input style="width:200px" type="text" placeholder="${a[i]}"
@@ -688,7 +688,7 @@ function openOptions(){
     html: '<button onclick="backupData()">Export Data</button>',
     h2: 'Import Data',
     fileInput: 'restoreFile',
-    html2: '<a href="img/todoka.crx" download>Download chrome app</a>',
+    html2: '<br><br><a href="javascript:void" onclick="downloadApp()" download>Download app to computer</a>',
     filter: {
       label: "Select a filter theme",
       type: "radio",
@@ -717,6 +717,17 @@ function openOptions(){
     setTheme(result.filter);
     window.location.reload(false);
   })
+}
+
+function downloadApp(){
+  popup(`
+    <h1>Install Todoka Application</h1>
+    <p>You will need a chrome or chromium type browser for this</p>
+    <ol>
+      <li>Navigate to the url chrome:extentions in the chrome browser</li>
+      <li>Download the app from <a href="img/todoka.crx" download>this link</a></li>
+    </ol>
+  `)
 }
 
 function setTheme(filter=userData.theme){

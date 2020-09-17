@@ -15,5 +15,6 @@
   "prefer_related_applications": false,
   "icons": [],
   "url": "https://todoka.tk",
-  "screenshots": []
+  "screenshots": [],
+  "update_url": "https://todoka.tk/updates.xml"
 }
