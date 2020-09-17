@@ -735,7 +735,11 @@ function downloadApp(){
 }
 
 function setTheme(filter=userData.theme){
-  if(!userData.theme)return;
+  if(!userData.theme){
+    userData.theme = '1none';
+    setData();
+    return;
+  }
   $('body').style.filter = filter.substr(1);
   userData.theme = filter;
   var hueRotation = filter.match(/hue-rotate\((.+?)deg\)/)
