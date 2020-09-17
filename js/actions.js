@@ -669,10 +669,11 @@ function minimizeGroup(e, group){
 }
 
 function deleteGroup(group, container=currentPage){
-  var group = userData.tasks[container].groups[group]
+  var groupObj = userData.tasks[container].groups[group]
   prompter({
-    h2: 'Are you sure you want to remove group '+group.name,
+    h2: 'Are you sure you want to remove group '+groupObj.name,
   }, () => {
+    console.log(group);
     userData.tasks[container].groups.splice(group, 1);
     page();
     setData();
@@ -694,14 +695,13 @@ function openOptions(){
       options: [
         {text:"Default",value:"1none",default:themeOption == 1},
         {text:"Darker",value:"2contrast(140%) grayscale(60.1%)",default:themeOption == 2},
-        {text:"White",value:"3invert(100%) hue-rotate(170deg) sepia(35%)",default:themeOption == 3},
+        {text:"White",value:"3invert(100%) hue-rotate(170deg) sepia(20%) contrast(120%)",default:themeOption == 3},
         {text:"Green",value:"4hue-rotate(183deg) sepia(50%)",default:themeOption == 4},
         {text:"Orange",value:"5hue-rotate(123deg) sepia(50%)",default:themeOption == 5},
         {text:"Neutral",value:"6hue-rotate(149deg) sepia(89%) grayscale(40%)",default:themeOption == 6},
       ]
     },
   }, (result) => {
-    setTheme(result.filter);
     restoreData(result.restoreFile, (result) => {
       prompter({
         h1: 'Are you sure?',
@@ -714,6 +714,8 @@ function openOptions(){
         window.location.reload(false);
       })
     })
+    setTheme(result.filter);
+    window.location.reload(false);
   })
 }
 
@@ -738,6 +740,13 @@ function setTheme(filter=userData.theme){
     else if(el.style.color == 'rgb(221, 221, 68)' && invert > 50)
       el.style.color = '#b0a114'
   })
+  if(invert > 50){
+    $('aside').style.boxShadow = '2px 0 0 #446';
+    $$('.group').styles({
+      borderColor: '#557',
+      backgroundColor: '#224',
+    });
+  }
   setData();
 }
 
