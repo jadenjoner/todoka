@@ -721,11 +721,16 @@ function openOptions(){
 function downloadApp(){
   popup(`
     <h1>Install Todoka Application</h1>
-    <p>You will need a chrome or chromium type browser for this</p>
+    <p>You will need a chrome, edge, or any chromeium browser for this</p>
     <ol>
+      <li>Download the app from <a href="img/todoka.zip" download>this link</a></li>
+      <li>Unzip the zip file you just downloaded to get the .crx file</li>
       <li>Navigate to the url chrome:extentions in the chrome browser</li>
-      <li>Download the app from <a href="img/todoka.crx" download>this link</a></li>
+      <li>Turn on the developer mode on the top right</li>
+      <li>Drag and drop the todoka.crx file onto the page</li>
     </ol>
+    <br>
+    <img src="appi1.png" style="width:100%">
   `)
 }
 

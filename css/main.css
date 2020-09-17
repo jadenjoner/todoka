@@ -204,6 +204,9 @@ main .center a {
   text-decoration: underline;
   margin-bottom: 8px;
 }
+main .center ul, main .center ol {
+  margin-left: 20px;
+}
 main .center button,
 main .center input[type=button],
 main .center input[type=submit],
@@ -590,6 +593,9 @@ main .center .checkbox input:checked ~ .checkmark {
   color: #9ea3bb;
   text-decoration: underline;
   margin-bottom: 8px;
+}
+.popup .box .center ul, .popup .box .center ol, .popup2 .box .center ul, .popup2 .box .center ol {
+  margin-left: 20px;
 }
 .popup .box .center button,
 .popup .box .center input[type=button],
