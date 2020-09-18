@@ -2,6 +2,7 @@ var userData = getData();
 var prompterAfter;
 var iconAfter;
 var currentPage = 0;
+var checkBoxInterval;
 var homePageHTML =
 `<img style="width:100%" src="img/todoka-title.svg"/>
 <div class="middle">
@@ -595,7 +596,6 @@ function addTask(group, container=currentPage){
       ]
     },
   },(result) => {
-    console.log(result);
     userData.tasks[currentPage].groups[group].tasks.push({
       name: result.name,
       date: result.dewdate,
@@ -669,10 +669,14 @@ function checkTheBox(event, group, task, container=currentPage){
 
     userData.tasks[container].groups[group].tasks.splice(task, 1);
     setData();
-    setInterval(() => {
+    clearInterval(checkBoxInterval)
+    if(checkBoxInterval != false)
+    checkBoxInterval = setInterval(() => {
       event.target.parentElement.outerHTML = '';
       if(currentPage == -1)page();
+      checkBoxInterval = false;
     }, 1000)
+    else event.target.parentElement.outerHTML = '';
 
 
 
