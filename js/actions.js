@@ -373,7 +373,7 @@ function prompter(a, func){
       <button onclick="iconPopup(updateFormIconText)" style="padding: 3px 6px;margin-bottom:0">Select Icon</button>
       <br><input style="width:200px" type="text" placeholder="${a[i]}"
       onkeyup="updateFormIcon(event)" class="formitem-icon"><i id="formIconSample"
-      onclick="iconPopup(updateFormIconText)">search</i><br>`; break;
+      onclick="iconPopup(updateFormIconText)"></i><br>`; break;
       default: result += `<input type="text" placeholder="${a.setDefaultValues ? i : a[i]}"
        class="formitem-${i}" ${a.setDefaultValues ? `value="${a[i]}"` : ''}>`; break;
     }
@@ -525,13 +525,17 @@ function addTask(group, container=currentPage){
       type: "checkbox",
     },
     dewdate: {
-      label: "When should this be done?",
+      label: "When will you do this?",
       type: "radio",
       options: [
         {text:"Today",value:"1",default:true},
         {text:"This Week",value:"2"},
         {text:"This Month",value:"3"},
       ]
+    },
+    date: {
+      label: "Include date",
+      type: "checkbox",
     },
     time: {
       label: "How long will this task take?",
@@ -745,7 +749,7 @@ function openOptions(){
     if(!userData.tutorialEnd){
       console.log('tutorialEnd');
       userData.tutorialEnd = true;
-      page(); 
+      page();
     }
   })
   setData();
