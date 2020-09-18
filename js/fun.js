@@ -9,8 +9,12 @@ function $(query) {
   result.hide = function(){
     result.style.display = 'none';
   }
-  result.show = function(display){
+  result.show = function(display=""){
     result.style.display = display;
+  }
+  result.toggle = function(display=""){
+    if(result.style.display == "none")result.style.display = display;
+    else result.style.display = "none";
   }
 
 
@@ -37,6 +41,13 @@ function $$(query) {
     result.forEach((c) => {
       if(c.style != undefined)
         c.style.display = display;
+    })
+  }
+  result.toggle = function(display=""){
+    result.forEach((c) => {
+      console.log(c.style.display)
+      if (c.style.display == "none")c.style.display = display;
+      else c.style.display = "none";
     })
   }
 
