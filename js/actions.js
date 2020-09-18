@@ -471,7 +471,7 @@ function closePopup(e){
 function addContainer(){
   prompter({
     h1: "Create new category",
-    name: "category Name",
+    name: "Category Name",
     p: "ex. School, Work, Projects",
     selectIcon: "Icon"
   }, (result) => {
@@ -534,7 +534,7 @@ function addTask(group, container=currentPage){
       ]
     },
     date: {
-      label: "Include date",
+      label: "Include dew date",
       type: "checkbox",
     },
     time: {
