@@ -264,8 +264,11 @@ main .center input[type=file] {
 main .center input[type=file]:hover {
   cursor: pointer;
   border-color: #A3B715;
-  cursor: pointer;
   color: black;
+}
+main .center input[type=file]:active {
+  transition: 0s;
+  background: #A3B715;
 }
 main .center input[type=text],
 main .center input[type=number] {
@@ -719,8 +722,11 @@ main .center .checkbox input:checked ~ .checkmark {
 .popup .box .center input[type=file]:hover, .popup2 .box .center input[type=file]:hover {
   cursor: pointer;
   border-color: #A3B715;
-  cursor: pointer;
   color: black;
+}
+.popup .box .center input[type=file]:active, .popup2 .box .center input[type=file]:active {
+  transition: 0s;
+  background: #A3B715;
 }
 .popup .box .center input[type=text],
 .popup .box .center input[type=number], .popup2 .box .center input[type=text],

@@ -148,8 +148,10 @@ i {
     &:hover{
       cursor: pointer;
       border-color: #A3B715;
-      cursor: pointer;
       color: black;
+    }&:active{
+      transition: 0s;
+      background: #A3B715;
     }
   }
 

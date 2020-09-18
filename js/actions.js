@@ -83,7 +83,7 @@ function page(number=currentPage){
           taskInfo: generateInfo(b.time, b.effort),
           taskNumber: e,
           priority: b.priority ? '<b style="\
-          color:#d44;position:relative;top:3px">*</b>' : '',
+          color:#d44;position:relative;top:3px" class="uninvert">*</b>' : '',
           taskD1: b.date == 1 ? 'selected="true"' : '',
           taskD2: b.date == 2 ? 'selected="true"' : '',
           taskD3: b.date == 3 ? 'selected="true"' : '',
@@ -132,7 +132,7 @@ function createHomePage(){
         taskInfo: generateInfo(c.time, c.effort),
         taskNumber: cc,
         priority: c.priority ? '<b style="\
-        color:#d44;position:relative;top:3px">*</b>' : '',
+        color:#d44;position:relative;top:3px" class="uninvert">*</b>' : '',
         taskD1: c.date == 1 ? 'selected="true"' : '',
         taskD2: c.date == 2 ? 'selected="true"' : '',
         taskD3: c.date == 3 ? 'selected="true"' : '',
@@ -744,6 +744,10 @@ function openOptions(){
   if(!userData.tutorialEnd){
     userData.tutorialEnd = true;
     page();
+    prompter({
+      h1: 'Do you want to download Todoka application?',
+      html2: '<br><br><button onclick="downloadApp()">Download app to computer</button>',
+    })
   }
   setData();
 }
