@@ -745,7 +745,7 @@ function openOptions(){
     if(!userData.tutorialEnd){
       console.log('tutorialEnd');
       userData.tutorialEnd = true;
-      page();
+      page(); 
     }
   })
   setData();
