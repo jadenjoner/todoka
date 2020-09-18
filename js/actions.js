@@ -391,7 +391,7 @@ function prompter(a, func){
       else if(a[i].type == "checkbox"){
         result += `<br>`
         if(a[i].label)
-        result += `<br><label name="${i}" class="checkbox">${a[i].label}
+        result += `<br><label name="${i}" class="checkbox" onchange="${a[i].onclick}">${a[i].label}
           <input type="checkbox" ${a[i].default ? 'checked' : ''} name="${i}">
           <span class="checkmark"></span>
         </label>`
@@ -517,6 +517,9 @@ function deleteContainer(container=currentPage){
 }
 
 function addTask(group, container=currentPage){
+  var d = new Date();
+  var month = d.getMonth()+1;
+  var day = d.getDate();
   prompter({
     h1: "New Task",
     name: "Task Name",
@@ -534,9 +537,34 @@ function addTask(group, container=currentPage){
       ]
     },
     date: {
-      label: "Include dew date",
+      label: "Has a date",
       type: "checkbox",
+      onclick: "$$('.duedateselect').toggle('block',true)",
     },
+    html1: `<br>
+    <select class="duedateselect">
+      <option ${month == 1 ? 'selected' : ''}>Jan</option>
+      <option ${month == 2 ? 'selected' : ''}>Feb</option>
+      <option ${month == 3 ? 'selected' : ''}>Mar</option>
+      <option ${month == 4 ? 'selected' : ''}>Apr</option>
+      <option ${month == 5 ? 'selected' : ''}>May</option>
+      <option ${month == 6 ? 'selected' : ''}>Jun</option>
+      <option ${month == 7 ? 'selected' : ''}>Jul</option>
+      <option ${month == 8 ? 'selected' : ''}>Aug</option>
+      <option ${month == 9 ? 'selected' : ''}>Sep</option>
+      <option ${month == 10 ? 'selected' : ''}>Nov</option>
+      <option ${month == 11 ? 'selected' : ''}>Dec</option>
+    </select>
+    <select class="duedateselect">
+      ${(function () {
+        var result = ''
+        for(var i=0; i<31; i++){
+          result += `
+            <option ${day == i ? 'selected' : ''}>${i}</option>
+          `
+        };return result;
+      })()}
+    </select>`,
     time: {
       label: "How long will this task take?",
       type: "radio",
@@ -747,7 +775,6 @@ function openOptions(){
     setTheme(result.filter);
     setData();
     if(!userData.tutorialEnd){
-      console.log('tutorialEnd');
       userData.tutorialEnd = true;
       page();
     }

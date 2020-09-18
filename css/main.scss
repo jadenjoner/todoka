@@ -73,6 +73,7 @@ i {
 .clear {
   clear: both;
 }
+
 @mixin content {
 
   h1 {
@@ -98,6 +99,10 @@ i {
 
   ul, ol{
     margin-left: 20px;
+  }
+
+  .duedateselect{
+    display: none;
   }
 
   button,
@@ -156,7 +161,9 @@ i {
   }
 
   input[type="text"],
-  input[type="number"] {
+  input[type="number"],
+  select {
+    appearance:none;
     width: 250px;
     margin-bottom: 8px;
     background: $black4;
@@ -169,6 +176,18 @@ i {
 
     &:focus {
       border-color: $theme;
+    }
+  }
+
+  select{
+    background-image: url("data:image/svg+xml;utf8,<svg fill='lightgrey' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 5px;
+    width: 150px;
+    color: $white3;
+    &:hover{
+      cursor: pointer;
     }
   }
 

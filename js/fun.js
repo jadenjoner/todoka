@@ -43,10 +43,9 @@ function $$(query) {
         c.style.display = display;
     })
   }
-  result.toggle = function(display=""){
+  result.toggle = function(display="", invert=false){
     result.forEach((c) => {
-      console.log(c.style.display)
-      if (c.style.display == "none")c.style.display = display;
+      if (c.style.display == "none" || (!c.style.display && invert))c.style.display = display;
       else c.style.display = "none";
     })
   }

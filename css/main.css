@@ -207,6 +207,9 @@ main .center a {
 main .center ul, main .center ol {
   margin-left: 20px;
 }
+main .center .duedateselect {
+  display: none;
+}
 main .center button,
 main .center input[type=button],
 main .center input[type=submit],
@@ -271,7 +274,9 @@ main .center input[type=file]:active {
   background: #A3B715;
 }
 main .center input[type=text],
-main .center input[type=number] {
+main .center input[type=number],
+main .center select {
+  appearance: none;
   width: 250px;
   margin-bottom: 8px;
   background: #212945;
@@ -283,8 +288,20 @@ main .center input[type=number] {
   outline: none;
 }
 main .center input[type=text]:focus,
-main .center input[type=number]:focus {
+main .center input[type=number]:focus,
+main .center select:focus {
   border-color: #5b48e9;
+}
+main .center select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='lightgrey' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  width: 150px;
+  color: #9ea3bb;
+}
+main .center select:hover {
+  cursor: pointer;
 }
 main .center p {
   margin-bottom: 8px;
@@ -653,6 +670,9 @@ main .center .checkbox input:checked ~ .checkmark {
 .popup .box .center ul, .popup .box .center ol, .popup2 .box .center ul, .popup2 .box .center ol {
   margin-left: 20px;
 }
+.popup .box .center .duedateselect, .popup2 .box .center .duedateselect {
+  display: none;
+}
 .popup .box .center button,
 .popup .box .center input[type=button],
 .popup .box .center input[type=submit],
@@ -729,8 +749,11 @@ main .center .checkbox input:checked ~ .checkmark {
   background: #A3B715;
 }
 .popup .box .center input[type=text],
-.popup .box .center input[type=number], .popup2 .box .center input[type=text],
-.popup2 .box .center input[type=number] {
+.popup .box .center input[type=number],
+.popup .box .center select, .popup2 .box .center input[type=text],
+.popup2 .box .center input[type=number],
+.popup2 .box .center select {
+  appearance: none;
   width: 250px;
   margin-bottom: 8px;
   background: #212945;
@@ -742,9 +765,22 @@ main .center .checkbox input:checked ~ .checkmark {
   outline: none;
 }
 .popup .box .center input[type=text]:focus,
-.popup .box .center input[type=number]:focus, .popup2 .box .center input[type=text]:focus,
-.popup2 .box .center input[type=number]:focus {
+.popup .box .center input[type=number]:focus,
+.popup .box .center select:focus, .popup2 .box .center input[type=text]:focus,
+.popup2 .box .center input[type=number]:focus,
+.popup2 .box .center select:focus {
   border-color: #5b48e9;
+}
+.popup .box .center select, .popup2 .box .center select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='lightgrey' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  width: 150px;
+  color: #9ea3bb;
+}
+.popup .box .center select:hover, .popup2 .box .center select:hover {
+  cursor: pointer;
 }
 .popup .box .center p, .popup2 .box .center p {
   margin-bottom: 8px;
