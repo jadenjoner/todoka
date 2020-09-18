@@ -103,8 +103,7 @@ i {
   button,
   input[type="button"],
   input[type="submit"],
-  input.button,
-  input[type="file"] {
+  input.button {
     background: $black2;
     border: 2px solid $black0;
     padding: 8px 16px;
@@ -133,7 +132,25 @@ i {
     }
   }
   input[type="file"]{
+    border: 2px solid #F6F4E2;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 17px;
+    margin-bottom: 4px;
+    transition: 0.2s;
+    margin-bottom: 8px;
+    outline: none;
     padding-left: -50px !important;
+    filter: invert(100%);
+    background: #F1EFEE;
+    color: #484335;
+    &:hover{
+      cursor: pointer;
+      border-color: #A3B715;
+      cursor: pointer;
+      color: black;
+    }
   }
 
   input[type="text"],
