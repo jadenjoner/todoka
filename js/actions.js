@@ -711,6 +711,8 @@ function openOptions(){
     html: '<br><button onclick="backupData()">Export</button>',
     h23: 'Import Data',
     fileInput: 'restoreFile',
+    h24: 'Clear all Data',
+    html3: '<br><button onclick="clearData()">Clear data</button>',
     html2: '<br><br><button onclick="downloadApp()">Download app to computer</button>',
     filter: {
       label: "Select a filter theme",
@@ -740,16 +742,31 @@ function openOptions(){
     })
     setTheme(result.filter);
     setData();
+    if(!userData.tutorialEnd){
+      console.log('tutorialEnd');
+      userData.tutorialEnd = true;
+      page();
+      setTimeout(()=>{
+        prompter({
+          h1: 'Do you want to download Todoka application?',
+        }, () => {
+          downloadApp();
+        })
+      }, 10)
+    }
   })
-  if(!userData.tutorialEnd){
-    userData.tutorialEnd = true;
-    page();
-    prompter({
-      h1: 'Do you want to download Todoka application?',
-      html2: '<br><br><button onclick="downloadApp()">Download app to computer</button>',
-    })
-  }
   setData();
+}
+
+function clearData(){
+  prompter({
+    h1: 'Are you sure you want to clear all your data?',
+    html: '<br><button onclick="backupData()">Backup your data</button><br>',
+    p: 'This will remove all of your data. backup data?',
+  }, () => {
+    localStorage.clear();
+    window.location.reload(false);
+  })
 }
 
 function downloadApp(){
