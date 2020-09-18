@@ -98,8 +98,7 @@ function page(number=currentPage){
     else if(userData.tasks[0].groups[0].tasks.length == 0)
       $('.start-here.third').style.display = 'block';
     else {
-      userData.tutorialEnd = true;
-      setData();
+      $('.start-here.fourth').style.display = 'block';
     }
   }
 }
@@ -238,13 +237,13 @@ function createHomePage(){
     ]
   groups = groups.filter(group => group.groupTasks.length)
 
-
-
   $('main .center').innerHTML = homeTemplate({
     groups: groups,
   })
 
   setTheme()
+
+  if(!userData.tutorialEnd)$('.start-here.fifth').style.display="block";
 }
 
 function pageTemplate(arr){
@@ -295,6 +294,7 @@ function pageTemplate(arr){
     </div>
     <div class="start-here second"><i>arrow_upward</i><span>Create new group</span></div>
     <div class="start-here third"><span>Add new task</span><i>arrow_upward</i></div>
+    <div class="start-here fourth"><i>arrow_back</i><span>See organized tasks</span></div>
     `, arr);
 }
 
@@ -336,6 +336,8 @@ function homeTemplate(arr){
       </div>
     </div>
     {/for}
+    <div class="start-here fifth"><i>arrow_back</i><span>View settings</span></div>
+
   `, arr);
 }
 
@@ -739,6 +741,11 @@ function openOptions(){
     setTheme(result.filter);
     setData();
   })
+  if(!userData.tutorialEnd){
+    userData.tutorialEnd = true;
+    page();
+  }
+  setData();
 }
 
 function downloadApp(){

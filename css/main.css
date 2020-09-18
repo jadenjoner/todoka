@@ -470,6 +470,14 @@ main .center .start-here.third {
 main .center .start-here.third i {
   float: right;
 }
+main .center .start-here.fourth {
+  top: 60px;
+  left: 300px;
+}
+main .center .start-here.fifth {
+  top: 4px;
+  left: 35px;
+}
 main .center .color-outer {
   display: flex;
   margin-bottom: 20px;
@@ -908,6 +916,14 @@ main .center .checkbox input:checked ~ .checkmark {
 }
 .popup .box .center .start-here.third i, .popup2 .box .center .start-here.third i {
   float: right;
+}
+.popup .box .center .start-here.fourth, .popup2 .box .center .start-here.fourth {
+  top: 60px;
+  left: 300px;
+}
+.popup .box .center .start-here.fifth, .popup2 .box .center .start-here.fifth {
+  top: 4px;
+  left: 35px;
 }
 .popup .box .center .color-outer, .popup2 .box .center .color-outer {
   display: flex;
