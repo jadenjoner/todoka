@@ -151,7 +151,7 @@ function createHomePage(){
     $('main .center').innerHTML = homePageHTML
     return;
   }
-
+  var d = new Date();
   var groups = [
       {
         groupName: 'Today',
@@ -239,6 +239,8 @@ function createHomePage(){
 
   $('main .center').innerHTML = homeTemplate({
     groups: groups,
+    dateTime: `${d.toLocaleDateString(undefined,{weekday:'long'})},
+    ${d.toLocaleDateString(undefined,{month:'short'})} ${d.getDate()}  ${d.getHours()%12}:${d.getMinutes()}`,
   })
 
   setTheme()
@@ -301,6 +303,7 @@ function pageTemplate(arr){
 function homeTemplate(arr){
   return repit(`
     <h1>Home</h1>
+    <h2>{dateTime}</h2><br>
     {for groups}
     <div class="group{minimizeGroup}">
       <div class="top">
@@ -437,6 +440,12 @@ function prompterBefore(e) {
     else if(child.type == "file"){
       result[child.getAttribute('name')] = child
     }
+    else if(child.tagName == "SELECT"){
+      var option = child.options[child.selectedIndex].value
+      result[child.getAttribute('name')] = option;
+      if(child.className == 'duedateselect')
+          result[child.getAttribute('name')] = child.selectedIndex;
+    }
     else if(child.className == 'color-outer uninvert'){
       child.childNodes.forEach((label) => {
         if(label.children.length && label.children[0].checked)
@@ -536,13 +545,13 @@ function addTask(group, container=currentPage){
         {text:"This Month",value:"3"},
       ]
     },
-    date: {
+    hasDate: {
       label: "Has a date",
       type: "checkbox",
       onclick: "$$('.duedateselect').toggle('block',true)",
     },
     html1: `<br>
-    <select class="duedateselect">
+    <select class="duedateselect" name="month">
       <option ${month == 1 ? 'selected' : ''}>Jan</option>
       <option ${month == 2 ? 'selected' : ''}>Feb</option>
       <option ${month == 3 ? 'selected' : ''}>Mar</option>
@@ -555,7 +564,7 @@ function addTask(group, container=currentPage){
       <option ${month == 10 ? 'selected' : ''}>Nov</option>
       <option ${month == 11 ? 'selected' : ''}>Dec</option>
     </select>
-    <select class="duedateselect">
+    <select class="duedateselect" name="day">
       ${(function () {
         var result = ''
         for(var i=0; i<31; i++){
@@ -586,6 +595,7 @@ function addTask(group, container=currentPage){
       ]
     },
   },(result) => {
+    console.log(result);
     userData.tasks[currentPage].groups[group].tasks.push({
       name: result.name,
       date: result.dewdate,
