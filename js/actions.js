@@ -222,7 +222,7 @@ function createHomePage(){
   $('main .center').innerHTML = homeTemplate({
     groups: groups,
     dateTime: `${d.toLocaleDateString(undefined,{weekday:'long'})},
-    ${d.toLocaleDateString(undefined,{month:'short'})} ${d.getDate()}  ${d.getHours()%12}:${d.getMinutes()}`,
+    ${d.toLocaleDateString(undefined,{month:'short'})} ${d.getDate()}`,
   })
 
   setTheme()
@@ -335,6 +335,7 @@ function generateInfo(task){
       d.setFullYear((new Date).getFullYear()+1)
       dayDistance = days_between(today, d)
       d.getDay = () => task.day;
+      console.log(dayDistance);
     };
     if(dayDistance == 0)return 'Tomorrow';
     else if(dayDistance <= 7)
