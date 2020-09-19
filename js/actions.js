@@ -2,7 +2,8 @@ var userData = getData();
 var prompterAfter;
 var iconAfter;
 var currentPage = 0;
-var checkBoxInterval;
+var checkBoxInterval = false;
+var checkBoxCurrent = null;
 var homePageHTML =
 `<img style="width:100%" src="img/todoka-title.svg"/>
 <div class="middle">
@@ -81,7 +82,7 @@ function page(number=currentPage){
         groupInfo: i.tasks.length+' Tasks',
         groupTasks: i.tasks.map((b, e) => {return {
           taskName: b.name,
-          taskInfo: generateInfo(b.time, b.effort),
+          taskInfo: generateInfo(b),
           taskNumber: e,
           priority: b.priority ? '<b style="\
           color:#d44;position:relative;top:3px" class="uninvert">*</b>' : '',
@@ -345,7 +346,21 @@ function homeTemplate(arr){
   `, arr);
 }
 
-function generateInfo(time, effort){
+function generateInfo(task){
+  if(task.useDate){
+    var today = new Date();
+    var d = new Date(task.month+'/'+task.day+'/'+(new Date).getFullYear());
+    console.log(task.month+'/'+task.day+'/'+(new Date).getFullYear());
+    if(days_between(today, d) <= 7)
+    return d.toLocaleDateString(undefined,{weekday:'long'});
+    else if(days_between(today, d) <= 14)
+    return 'Next ' + d.toLocaleDateString(undefined,{weekday:'long'});
+    else return `${d.toLocaleDateString(undefined,{weekday:'short'})},
+    ${d.toLocaleDateString(undefined,{month:'short'})}
+    ${d.getDay()}`;
+  }
+  var time = task.time;
+  var effort = task.effort;
   var result = ''
   if(time == 1)result += 'Few work '
   else if(time == 2)result += 'A bit of work '
@@ -355,7 +370,7 @@ function generateInfo(time, effort){
   if(effort == 1)result += 'but its easy'
   else if(effort == 2)result += 'and some effort'
   else result += 'and its hard'
-  return result
+  return result;
 }
 
 function prompter(a, func){
@@ -568,7 +583,7 @@ function addTask(group, container=currentPage){
     <select class="duedateselect" name="day">
       ${(function () {
         var result = ''
-        for(var i=0; i<31; i++){
+        for(var i=1; i<32; i++){
           result += `
             <option ${day == i ? 'selected' : ''}>${i}</option>
           `
@@ -597,6 +612,9 @@ function addTask(group, container=currentPage){
     },
   },(result) => {
     userData.tasks[currentPage].groups[group].tasks.push({
+      useDate: result.hasDate,
+      day: result.day+1,
+      month: result.month+1,
       name: result.name,
       date: result.dewdate,
       time: result.time,
@@ -611,6 +629,8 @@ function addTask(group, container=currentPage){
 
 function editTask(group, task, container=currentPage){
   var taskData = userData.tasks[container].groups[group].tasks[task];
+  month = taskData.month;
+  day = taskData.day;
   prompter({
     setDefaultValues: true,
     h1: "Edit Task",
@@ -629,6 +649,36 @@ function editTask(group, task, container=currentPage){
         {text:"This Month",value:"3",default:taskData.date==3},
       ]
     },
+    hasDate: {
+      label: "Has a date",
+      type: "checkbox",
+      onclick: "$$('.duedateselect').toggle('block',true)",
+      default: taskData.useDate,
+    },
+    html1: `<br>
+    <select class="duedateselect" style="${taskData.useDate ? 'display:block':'display:none'}" name="month">
+      <option ${month == 1 ? 'selected' : ''}>Jan</option>
+      <option ${month == 2 ? 'selected' : ''}>Feb</option>
+      <option ${month == 3 ? 'selected' : ''}>Mar</option>
+      <option ${month == 4 ? 'selected' : ''}>Apr</option>
+      <option ${month == 5 ? 'selected' : ''}>May</option>
+      <option ${month == 6 ? 'selected' : ''}>Jun</option>
+      <option ${month == 7 ? 'selected' : ''}>Jul</option>
+      <option ${month == 8 ? 'selected' : ''}>Aug</option>
+      <option ${month == 9 ? 'selected' : ''}>Sep</option>
+      <option ${month == 10 ? 'selected' : ''}>Nov</option>
+      <option ${month == 11 ? 'selected' : ''}>Dec</option>
+    </select>
+    <select class="duedateselect" style="${taskData.useDate ? 'display:block':'display:none'}" name="day">
+      ${(function () {
+        var result = ''
+        for(var i=1; i<32; i++){
+          result += `
+            <option ${day == i ? 'selected' : ''}>${i}</option>
+          `
+        };return result;
+      })()}
+    </select>`,
     time: {
       label: "How long will this task take?",
       type: "radio",
@@ -650,6 +700,9 @@ function editTask(group, task, container=currentPage){
     },
   },(result) => {
     userData.tasks[container].groups[group].tasks[task] = {
+      useDate: result.hasDate,
+      day: result.day+1,
+      month: result.month+1,
       name: result.name,
       date: result.dewdate,
       time: result.time,
@@ -667,22 +720,25 @@ function checkTheBox(event, group, task, container=currentPage){
     event.target.parentElement.style.transform = 'scaleY(0)';
     event.target.parentElement.style.margin = '-15px 0';
 
+    if(checkBoxCurrent)
+    checkBoxCurrent.outerHTML = '';
+    checkBoxCurrent = event.target.parentElement;
     userData.tasks[container].groups[group].tasks.splice(task, 1);
     setData();
-    clearInterval(checkBoxInterval)
-    if(checkBoxInterval != false)
-    checkBoxInterval = setInterval(() => {
-      event.target.parentElement.outerHTML = '';
-      if(currentPage == -1)page();
-      checkBoxInterval = false;
-    }, 1000)
+    if(checkBoxInterval == false){
+      checkBoxInterval = setInterval(() => {
+        event.target.parentElement.outerHTML = '';
+        if(currentPage == -1)page();
+        checkBoxInterval = false;
+      }, 1000)
+    }
     else event.target.parentElement.outerHTML = '';
-
-
+    clearInterval(checkBoxInterval)
+    checkBoxInterval = false;
 
   }
   else if(event.target.innerText == 'check_box'){
-    event.target.innerText = 'check_box_outline_blank'
+    //event.target.innerText = 'check_box_outline_blank'
   }
 }
 
