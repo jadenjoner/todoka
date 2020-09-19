@@ -331,9 +331,13 @@ function generateInfo(task){
     var today = new Date();
     var d = new Date(task.month+'/'+task.day+'/'+(new Date).getFullYear());
     var dayDistance = days_between(today, d)
-    console.log(d.getMonth());
-    if(dayDistance < 0)dayDistance = 365-dayDistance;
-    if(dayDistance <= 7)
+    if(dayDistance < 0){
+      d.setFullYear((new Date).getFullYear()+1)
+      dayDistance = days_between(today, d)
+      d.getDay = () => task.day;
+    };
+    if(dayDistance == 0)return 'Tomorrow';
+    else if(dayDistance <= 7)
     return d.toLocaleDateString(undefined,{weekday:'long'});
     else if(dayDistance <= 14)
     return 'Next ' + d.toLocaleDateString(undefined,{weekday:'long'});
