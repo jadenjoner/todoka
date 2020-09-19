@@ -145,6 +145,7 @@ function createHomePage(){
         pageName:a.name,
         groupName2: b.name,
         pageIcon:a.icon,
+        taskInfo: generateInfo(c),
       });
     })));
     results.push(result);
@@ -204,7 +205,6 @@ function createHomePage(){
   ]
 
   groups = groups.map((c,i) => {
-    console.log(results[i].length);
     return {
       groupName: c.groupName,
       groupIcon: c.groupIcon,
@@ -216,7 +216,6 @@ function createHomePage(){
     }
   })
   groups = groups.filter(group => {
-    console.log(group);
     return group.groupTasks.length
   })
 
@@ -305,7 +304,7 @@ function homeTemplate(arr){
           <i style="opacity:0.5" onclick="page('{page}')">{pageIcon}</i>
           <i class="uninvert" style="opacity:0.5;color:{taskIconColor}" onclick="page('{page}')">{taskIcon}</i>
           <span class="task-name">{priority} {taskName}</span>
-          <span class="info">{pageName} - {groupName2}</span>
+          <span class="info">{taskInfo}</span>
           <div class="right">
             <i onclick="editTask('{groupNumber2}','{taskNumber}','{page}')"
             style="margin-right: 10px;">edit</i>
@@ -331,10 +330,12 @@ function generateInfo(task){
   if(task.useDate){
     var today = new Date();
     var d = new Date(task.month+'/'+task.day+'/'+(new Date).getFullYear());
-    console.log(task.month+'/'+task.day+'/'+(new Date).getFullYear());
-    if(days_between(today, d) <= 7)
+    var dayDistance = days_between(today, d)
+    console.log(d.getMonth());
+    if(dayDistance < 0)dayDistance = 365-dayDistance;
+    if(dayDistance <= 7)
     return d.toLocaleDateString(undefined,{weekday:'long'});
-    else if(days_between(today, d) <= 14)
+    else if(dayDistance <= 14)
     return 'Next ' + d.toLocaleDateString(undefined,{weekday:'long'});
     else return `${d.toLocaleDateString(undefined,{weekday:'short'})},
     ${d.toLocaleDateString(undefined,{month:'short'})}
@@ -558,8 +559,9 @@ function addTask(group, container=currentPage){
       <option ${month == 7 ? 'selected' : ''}>Jul</option>
       <option ${month == 8 ? 'selected' : ''}>Aug</option>
       <option ${month == 9 ? 'selected' : ''}>Sep</option>
-      <option ${month == 10 ? 'selected' : ''}>Nov</option>
-      <option ${month == 11 ? 'selected' : ''}>Dec</option>
+      <option ${month == 10 ? 'selected' : ''}>Oct</option>
+      <option ${month == 11 ? 'selected' : ''}>Nov</option>
+      <option ${month == 12 ? 'selected' : ''}>Dec</option>
     </select>
     <select class="duedateselect" name="day">
       ${(function () {
@@ -647,8 +649,9 @@ function editTask(group, task, container=currentPage){
       <option ${month == 7 ? 'selected' : ''}>Jul</option>
       <option ${month == 8 ? 'selected' : ''}>Aug</option>
       <option ${month == 9 ? 'selected' : ''}>Sep</option>
-      <option ${month == 10 ? 'selected' : ''}>Nov</option>
-      <option ${month == 11 ? 'selected' : ''}>Dec</option>
+      <option ${month == 10 ? 'selected' : ''}>Oct</option>
+      <option ${month == 11 ? 'selected' : ''}>Nov</option>
+      <option ${month == 12 ? 'selected' : ''}>Dec</option>
     </select>
     <select class="duedateselect" style="${taskData.useDate ? 'display:block':'display:none'}" name="day">
       ${(function () {
