@@ -154,90 +154,71 @@ function createHomePage(){
     return;
   }
   var d = new Date();
+  // {
+  //   groupName: 'Today',
+  //   groupIcon: 'view_day',
+  //   groupInfo: 'Current tasks to complete today',
+  //   groupNumber: 0,
+  //   groupTasks: results[0],
+  //   minimizeGroup: userData.homeGroups[0] ? ' minimize' : '',
+  //   minimizeIcon: userData.homeGroups[0] ? 'expand_more' : 'expand_less',
+  // },
   var groups = [
       {
         groupName: 'Today',
         groupIcon: 'view_day',
         groupInfo: 'Current tasks to complete today',
-        groupNumber: 0,
-        groupTasks: results[0],
-        minimizeGroup: userData.homeGroups[0] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[0] ? 'expand_more' : 'expand_less',
-      },
-      {
+      }, {
         groupName: 'Priority Tasks',
         groupIcon: 'priority_high',
         groupInfo: 'The most urgent tasks',
-        groupNumber: 1,
-        groupTasks: results[1],
-        minimizeGroup: userData.homeGroups[1] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[1] ? 'expand_more' : 'expand_less',
-      },
-      {
+      }, {
         groupName: 'Events',
         groupIcon: 'calendar_today',
         groupInfo: 'Current events',
-        groupNumber: 2,
-        groupTasks: results[2],
-        minimizeGroup: userData.homeGroups[2] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[2] ? 'expand_more' : 'expand_less',
-      },
-      {
+      }, {
         groupName: 'Reminders',
         groupIcon: 'notifications',
         groupInfo: 'Things you need to be reminded of',
-        groupNumber: 3,
-        groupTasks: results[3],
-        minimizeGroup: userData.homeGroups[3] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[3] ? 'expand_more' : 'expand_less',
-      },
-      {
+      }, {
         groupName: 'Challanges',
         groupIcon: 'emoji_events',
         groupInfo: 'Complete the hardest tasks',
-        groupNumber: 4,
-        groupTasks: results[4],
-        minimizeGroup: userData.homeGroups[4] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[4] ? 'expand_more' : 'expand_less',
-      },
-      {
+      }, {
         groupName: 'Easy Tasks',
         groupIcon: 'thumb_up',
         groupInfo: 'Complete the easier tasks',
-        groupNumber: 5,
-        groupTasks: results[5],
-        minimizeGroup: userData.homeGroups[5] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[5] ? 'expand_more' : 'expand_less',
-      },
-      {
+      }, {
         groupName: 'This Week',
         groupIcon: 'view_week',
         groupInfo: 'Tasks this week',
-        groupNumber: 6,
-        groupTasks: results[6],
-        minimizeGroup: userData.homeGroups[6] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[6] ? 'expand_more' : 'expand_less',
-      },
-      {
+      }, {
         groupName: 'This Month',
         groupIcon: 'view_comfy',
         groupInfo: 'Tasks this month',
-        groupNumber: 7,
-        groupTasks: results[7],
-        minimizeGroup: userData.homeGroups[7] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[7] ? 'expand_more' : 'expand_less',
-      },
-      {
+      }, {
         groupName: 'All Tasks',
         groupIcon: 'ballot',
         groupInfo: 'All of the tasks',
-        groupNumber: 8,
-        groupTasks: results[8],
-        minimizeGroup: userData.homeGroups[8] ? ' minimize' : '',
-        minimizeIcon: userData.homeGroups[8] ? 'expand_more' : 'expand_less',
       },
-    ]
-  groups = groups.filter(group => group.groupTasks.length)
+  ]
+
+  groups = groups.map((c,i) => {
+    console.log(results[i].length);
+    return {
+      groupName: c.groupName,
+      groupIcon: c.groupIcon,
+      groupInfo: c.groupInfo,
+      groupNumber: i,
+      groupTasks: results[i],
+      minimizeGroup: userData.homeGroups[i] ? ' minimize' : '',
+      minimizeIcon: userData.homeGroups[i] ? 'expand_more' : 'expand_less',
+    }
+  })
+  groups = groups.filter(group => {
+    console.log(group);
+    return group.groupTasks.length
+  })
 
   $('main .center').innerHTML = homeTemplate({
     groups: groups,
@@ -532,7 +513,7 @@ function addGroup(container=currentPage){
 
 function deleteContainer(container=currentPage){
   prompter({
-    h2: 'Are you sure you want to delete '+userData.tasks[currentPage].name+" category",
+    h1: 'Are you sure you want to delete '+userData.tasks[currentPage].name+" category",
   }, (result) => {
     userData.tasks.splice(currentPage, 1);
     updateSidebar();
@@ -796,7 +777,7 @@ function minimizeGroup(e, group){
 function deleteGroup(group, container=currentPage){
   var groupObj = userData.tasks[container].groups[group]
   prompter({
-    h2: 'Are you sure you want to remove group '+groupObj.name,
+    h1: 'Are you sure you want to remove group '+groupObj.name,
   }, () => {
     userData.tasks[container].groups.splice(group, 1);
     page();
