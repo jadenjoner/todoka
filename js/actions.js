@@ -806,6 +806,13 @@ function deleteGroup(group, container=currentPage){
 
 function openOptions(){
   var themeOption = userData.theme ? userData.theme.charAt(0) : 1
+  var afterTutoriral = false;
+  if(!userData.tutorialEnd){
+    afterTutoriral = true;
+    userData.tutorialEnd = true;
+    setData();
+    page();
+  }
   prompter({
     setDefaultValues: true,
     h1: 'Options',
@@ -844,8 +851,7 @@ function openOptions(){
     })
     setTheme(result.filter);
     setData();
-    if(!userData.tutorialEnd){
-      userData.tutorialEnd = true;
+    if(afterTutoriral){
       page();
     }
   })
