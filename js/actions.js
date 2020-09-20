@@ -35,6 +35,14 @@ function updateSidebar(data = userData, selected=0) {
     </div>
     <span class="right"></span>
   </div>`
+  result += `
+  <div onclick="page(-2)" ${selected == -2 ? 'selected' : ''}>
+    <div class="left">
+        <i>videocam</i>
+        <span>Meetings</span>
+    </div>
+    <span class="right"></span>
+  </div>`
   data.tasks.forEach((item, i) => {
     result += `
     <div onclick="page(${i})" ${selected == i ? 'selected' : ''}>
@@ -69,6 +77,8 @@ function page(number=currentPage){
     }
     updateSidebar(userData, number)
     return;
+  }else if(number == -2){
+    createMeetPage();
   }
   updateSidebar(userData, number)
   var task = userData.tasks[number]
@@ -324,6 +334,10 @@ function homeTemplate(arr){
     <div class="start-here fifth"><i>arrow_back</i><span>View settings</span></div>
 
   `, arr);
+}
+
+function createMeetPage(){
+  $('main .center').innerHTML = '<h1>Meetings</h1>'
 }
 
 function generateInfo(task){
@@ -683,8 +697,8 @@ function editTask(group, task, container=currentPage){
       type: "radio",
       options: [
         {text:"Easy",value:"1",default:taskData.effort==1},
-        {text:"Moderate",value:"2",default:taskData.effort==1},
-        {text:"Difficult",value:"3",default:taskData.effort==1},
+        {text:"Moderate",value:"2",default:taskData.effort==2},
+        {text:"Difficult",value:"3",default:taskData.effort==3},
       ]
     },
   },(result) => {
