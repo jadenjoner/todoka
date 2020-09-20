@@ -25,7 +25,6 @@ function setData(data=userData){
 }
 
 function updateSidebar(data = userData, selected=0) {
-
   var result = ''
   result += `
   <div onclick="page(-1)" ${selected == -1 ? 'selected' : ''}>
@@ -35,8 +34,9 @@ function updateSidebar(data = userData, selected=0) {
     </div>
     <span class="right"></span>
   </div>`
+  if(userData.useMeeting)
   result += `
-  <div onclick="page(-2)" ${selected == -2 ? 'selected' : ''}>
+  <div onclick="page(-2)" ${selected == '-2' ? 'selected' : ''}>
     <div class="left">
         <i>videocam</i>
         <span>Meetings</span>
@@ -58,7 +58,7 @@ function updateSidebar(data = userData, selected=0) {
 }
 
 function page(number=currentPage){
-  if(userData.tasks.length == 0){
+  if(userData.tasks.length == 0 && number != -2){
     number = -1;
   }
   currentPage = number;
@@ -67,6 +67,9 @@ function page(number=currentPage){
     $('main').style.display = 'block'
     $('.mobile-menu').style.display = 'block'
   }
+
+
+
   if(number == -1){
     if(userData.tasks.length > 0)
       createHomePage();
@@ -78,7 +81,9 @@ function page(number=currentPage){
     updateSidebar(userData, number)
     return;
   }else if(number == -2){
+    updateSidebar(userData, number)
     createMeetPage();
+    return;
   }
   updateSidebar(userData, number)
   var task = userData.tasks[number]
@@ -337,7 +342,11 @@ function homeTemplate(arr){
 }
 
 function createMeetPage(){
-  $('main .center').innerHTML = '<h1>Meetings</h1>'
+  $('main .center').innerHTML = generateMeetPage();
+}
+
+function generateMeetPage(){
+  return `<h1>Meetings</h1>`;
 }
 
 function generateInfo(task){
@@ -826,6 +835,11 @@ function openOptions(){
     h24: 'Clear all Data',
     html3: '<br><button onclick="clearData()">Clear data</button>',
     html2: '<br><br><button onclick="downloadApp()">Download app to computer</button>',
+    showMeeting: {
+      label: 'Use Meeting Section',
+      type: 'checkbox',
+      default: userData.useMeeting,
+    },
     filter: {
       label: "Select a filter theme",
       type: "radio",
@@ -853,12 +867,22 @@ function openOptions(){
       })
     })
     setTheme(result.filter);
+    userData.useMeeting = result.showMeeting;
     setData();
+    updateSidebar();
     if(afterTutoriral){
-      page();
+      setTimeout(() => {
+        return prompter({
+          h1: "Try the Todoka Meeting section?",
+          p: "If you do alot of online meetings or just meetings you should try the meeting section.",
+        },()=>{
+          userData.useMeeting = true;
+          page(-2);
+        })
+      }, 10)
+
     }
   })
-  setData();
 }
 
 function clearData(){
