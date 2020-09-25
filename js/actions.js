@@ -411,7 +411,7 @@ function prompter(a, func){
         result += `<br><br><h2>${a[i].label}</h2>`
         a[i].options.forEach((item) => {
           if(item.text != '')
-          result += `<br><label name="${i}" class="radio">${item.text}
+          result += `<br><label name="${i}" class="radio" onclick="${item.onclick}">${item.text}
             <input type="radio" ${item.default ? 'checked' : ''} value="${item.value}" name="${i}">
             <span class="checkmark"></span>
           </label>`
@@ -496,11 +496,17 @@ function updateFormIconText(icon){
 function closePopup(e){
   if(e == undefined){
     $('.popup').style.display = 'none';
+    setTheme();
   }
   else if(e == 2){
     $('.popup2').style.display = 'none';
   }
-  else if(e.target.className == 'popup' || e.target.className == 'popup2')event.target.style.display = 'none';
+  else if(e.target.className == 'popup' || e.target.className == 'popup2'){
+    event.target.style.display = 'none';
+    setTheme();
+  }
+
+
 }
 
 function addContainer(){
@@ -572,7 +578,7 @@ function addTask(group, container=currentPage){
       ]
     },
     hasDate: {
-      label: "Has a date",
+      label: "Has a date or dewdate",
       type: "checkbox",
       onclick: "$$('.duedateselect').toggle('block',true)",
     },
@@ -661,7 +667,7 @@ function editTask(group, task, container=currentPage){
       ]
     },
     hasDate: {
-      label: "Has a date",
+      label: "Has a date or dewdate",
       type: "checkbox",
       onclick: "$$('.duedateselect').toggle('block',true)",
       default: taskData.useDate,
@@ -844,12 +850,12 @@ function openOptions(){
       label: "Select a filter theme",
       type: "radio",
       options: [
-        {text:"Default",value:"1none",default:themeOption == 1},
-        {text:"Darker",value:"2contrast(140%) grayscale(60.1%)",default:themeOption == 2},
-        {text:"White",value:"3invert(100%) hue-rotate(170deg) sepia(20%) contrast(120%)",default:themeOption == 3},
-        {text:"Green",value:"4hue-rotate(183deg) sepia(50%)",default:themeOption == 4},
-        {text:"Orange",value:"5hue-rotate(123deg) sepia(50%)",default:themeOption == 5},
-        {text:"Neutral",value:"6hue-rotate(149deg) sepia(89%) grayscale(40%)",default:themeOption == 6},
+        {text:"Default",value:"1none",default:themeOption == 1,onclick:"setTheme('1none', false)"},
+        {text:"Darker",value:"2contrast(140%) grayscale(60.1%)",default:themeOption == 2,onclick:"setTheme('2contrast(140%) grayscale(60.1%)', false)"},
+        {text:"White",value:"3invert(100%) hue-rotate(170deg) sepia(20%) contrast(120%)",default:themeOption == 3,onclick:"setTheme('3invert(100%) hue-rotate(170deg) sepia(20%) contrast(120%)', false)"},
+        {text:"Green",value:"4hue-rotate(183deg) sepia(50%)",default:themeOption == 4,onclick:"setTheme('4hue-rotate(183deg) sepia(50%)', false)"},
+        {text:"Orange",value:"5hue-rotate(123deg) sepia(50%)",default:themeOption == 5,onclick:"setTheme('5hue-rotate(123deg) sepia(50%)', false)"},
+        {text:"Neutral",value:"6hue-rotate(149deg) sepia(89%) grayscale(40%)",default:themeOption == 6,onclick:"setTheme('6hue-rotate(149deg) sepia(89%) grayscale(40%)', false)"},
       ]
     },
   }, (result) => {
@@ -880,7 +886,6 @@ function openOptions(){
           page(-2);
         })
       }, 10)
-
     }
   })
 }
@@ -913,13 +918,14 @@ function downloadApp(){
   setTheme();
 }
 
-function setTheme(filter=userData.theme){
+function setTheme(filter=userData.theme, write=true){
   if(!userData.theme){
     userData.theme = '1none';
     setData();
     return;
   }
   $('body').style.filter = filter.substr(1);
+  if(write)
   userData.theme = filter;
   var hueRotation = filter.match(/hue-rotate\((.+?)deg\)/)
   hueRotation = hueRotation ? 360-hueRotation[1] : 0
