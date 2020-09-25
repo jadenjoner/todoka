@@ -902,7 +902,7 @@ function clearData(){
     p: 'This will remove all of your data. backup data?',
   }, () => {
     localStorage.clear();
-    window.location.reload(false);
+    setTimeout(window.location.reload(false), 100);
   })
 }
 
@@ -926,7 +926,7 @@ function downloadApp(){
 function setTheme(filter=userData.theme, write=true){
   if(userData.bgImage){
     $('main').style.backgroundImage =
-    "url('https://images.unsplash.com/photo-1523748889156-ad499aad0d69?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1778&q=80')";
+    "url('https://images.unsplash.com/photo-1600180864399-86e3a969bd70?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80')";
     $('main').classList.add('uninvert');
     $('main .center').classList.add('uninvert');
   } else {
