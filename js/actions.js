@@ -14,6 +14,18 @@ var homePageHTML =
 <img style="width:100%;border-radius:8px;border:2px solid #5b48e9" src="img/todoka-guide.gif"/>
 <div class="start-here"><i>arrow_back</i><span>Start Here</span></div>
 `
+var bgImages = [
+  'https://images.unsplash.com/photo-1600086026523-558cebf91280?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1311&q=80',
+  'https://images.unsplash.com/photo-1572080349201-c81c3061ce9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
+  'https://images.unsplash.com/photo-1599941634517-31390cacc03f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+  'https://images.unsplash.com/photo-1580176555250-1f842f0b4dd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+  'https://images.unsplash.com/photo-1599666433232-2b222eb02b8c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
+  'https://images.unsplash.com/photo-1599666432665-0150417654c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
+  'https://images.unsplash.com/photo-1599583986715-b517adddee25?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80',
+  'https://images.unsplash.com/photo-1598991685953-f39c94dd53e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+  'https://images.unsplash.com/photo-1599424056685-cacc7bee5cc3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
+  'https://images.unsplash.com/photo-1572037938067-42a609926467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80'
+]
 
 function getData() {
   if(localStorage.getItem('taskData') == null)setData({tasks: []});
@@ -923,16 +935,17 @@ function downloadApp(){
   setTheme();
 }
 
+
+
 function setTheme(filter=userData.theme, write=true){
   if(userData.bgImage){
-    $('main').style.backgroundImage =
-    "url('https://images.unsplash.com/photo-1600180864399-86e3a969bd70?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80')";
+    $('main').style.backgroundImage = `url(${bgImages[Math.floor(Math.random()*(9-0+1)+0)]})`;
     $('main').classList.add('uninvert');
-    $('main .center').classList.add('uninvert');
+    $('main .center').classList.add('ununinvert');
   } else {
     $('main').style.backgroundImage = 'none';
     $('main').classList.remove('uninvert');
-    $('main .center').classList.remove('uninvert');
+    $('main .center').classList.remove('ununinvert');
   }
   if(!userData.theme){
     userData.theme = '1none';
@@ -948,6 +961,9 @@ function setTheme(filter=userData.theme, write=true){
   invert = invert ? invert[1] : 0
   $$('.uninvert').styles({
     filter: `hue-rotate(${hueRotation}deg) invert(${invert}%)`
+  })
+  $$('.ununinvert').styles({
+    filter: `hue-rotate(${360-hueRotation}deg) invert(${invert}%)`
   })
   $$('.justuninvert').styles({
     filter: `invert(${invert}%)`

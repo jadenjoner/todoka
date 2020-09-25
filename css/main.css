@@ -193,6 +193,7 @@ main .center h1 {
   margin-bottom: 10px;
   text-transform: capitalize;
   color: #d2d5de;
+  text-shadow: 0px 0px 4px #212945;
 }
 main .center h2 {
   border-left: 3px solid #5b48e9;
@@ -660,6 +661,7 @@ main .center .checkbox input:checked ~ .checkmark {
   margin-bottom: 10px;
   text-transform: capitalize;
   color: #d2d5de;
+  text-shadow: 0px 0px 4px #212945;
 }
 .popup .box .center h2, .popup2 .box .center h2 {
   border-left: 3px solid #5b48e9;
