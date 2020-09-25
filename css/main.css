@@ -168,6 +168,7 @@ main {
   margin-left: 300px;
   overflow-y: auto;
   height: 100vh;
+  background-size: cover;
 }
 @media (max-width: 650px) {
   main {
@@ -191,6 +192,7 @@ main .center h1 {
   font-weight: 500;
   margin-bottom: 10px;
   text-transform: capitalize;
+  color: #d2d5de;
 }
 main .center h2 {
   border-left: 3px solid #5b48e9;
@@ -198,6 +200,7 @@ main .center h2 {
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 6px;
+  color: #d2d5de;
 }
 main .center a {
   color: #9ea3bb;
@@ -372,6 +375,7 @@ main .center .group .top .group-name {
   font-size: 22px;
   font-weight: 500;
   margin-right: 8px;
+  color: #d2d5de;
 }
 main .center .group .top .info {
   font-size: 16px;
@@ -616,6 +620,7 @@ main .center .checkbox input:checked ~ .checkmark {
 
 .popup2 .box {
   width: 500px !important;
+  max-width: 80% !important;
 }
 
 .popup, .popup2 {
@@ -654,6 +659,7 @@ main .center .checkbox input:checked ~ .checkmark {
   font-weight: 500;
   margin-bottom: 10px;
   text-transform: capitalize;
+  color: #d2d5de;
 }
 .popup .box .center h2, .popup2 .box .center h2 {
   border-left: 3px solid #5b48e9;
@@ -661,6 +667,7 @@ main .center .checkbox input:checked ~ .checkmark {
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 6px;
+  color: #d2d5de;
 }
 .popup .box .center a, .popup2 .box .center a {
   color: #9ea3bb;
@@ -851,6 +858,7 @@ main .center .checkbox input:checked ~ .checkmark {
   font-size: 22px;
   font-weight: 500;
   margin-right: 8px;
+  color: #d2d5de;
 }
 .popup .box .center .group .top .info, .popup2 .box .center .group .top .info {
   font-size: 16px;

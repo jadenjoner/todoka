@@ -81,6 +81,7 @@ i {
     font-weight: 500;
     margin-bottom: 10px;
     text-transform: capitalize;
+    color: $white1;
   }
 
   h2 {
@@ -89,6 +90,7 @@ i {
     font-size: 30px;
     font-weight: 500;
     margin-bottom: 6px;
+    color: $white1;
   }
 
   a {
@@ -269,6 +271,7 @@ i {
         font-size: 22px;
         font-weight: 500;
         margin-right: 8px;
+        color: $white1;
       }
 
       .info {
@@ -667,12 +670,12 @@ aside {
 }
 
 main {
-
   color: $white1;
   background: $black5;
   margin-left: 300px;
   overflow-y: auto;
   height: 100vh;
+  background-size: cover;
   @media (max-width: 650px) {
     display: none;
     width: 100%;
@@ -695,6 +698,7 @@ main {
 .popup2{
   .box{
     width: 500px !important;
+    max-width: 80% !important;
   }
 }
 
@@ -783,7 +787,6 @@ main {
     }
   }
 }
-
 
 .mobile-menu{
   z-index: 1000;

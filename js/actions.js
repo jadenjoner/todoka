@@ -842,9 +842,14 @@ function openOptions(){
     html3: '<br><button onclick="clearData()">Clear data</button>',
     html2: '<br><br><button onclick="downloadApp()">Download app to computer</button>',
     showMeeting: {
-      label: 'Use Meeting Section',
+      label: 'Use meeting section',
       type: 'checkbox',
       default: userData.useMeeting,
+    },
+    bgImage: {
+      label: 'Show background image',
+      type: 'checkbox',
+      default: userData.bgImage,
     },
     filter: {
       label: "Select a filter theme",
@@ -859,7 +864,7 @@ function openOptions(){
       ]
     },
   }, (result) => {
-    userData.name = result.name;
+    userData.bgImage = result.bgImage;
     restoreData(result.restoreFile, (result) => {
       prompter({
         h1: 'Are you sure?',
@@ -919,6 +924,16 @@ function downloadApp(){
 }
 
 function setTheme(filter=userData.theme, write=true){
+  if(userData.bgImage){
+    $('main').style.backgroundImage =
+    "url('https://images.unsplash.com/photo-1523748889156-ad499aad0d69?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1778&q=80')";
+    $('main').classList.add('uninvert');
+    $('main .center').classList.add('uninvert');
+  } else {
+    $('main').style.backgroundImage = 'none';
+    $('main').classList.remove('uninvert');
+    $('main .center').classList.remove('uninvert');
+  }
   if(!userData.theme){
     userData.theme = '1none';
     setData();
