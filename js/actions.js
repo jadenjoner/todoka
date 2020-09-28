@@ -715,7 +715,7 @@ function editTask(group, task, container=currentPage){
       options: [
         {text:"Less than half an hour",value:"1",default:taskData.time==1},
         {text:"Half an hour to an hour",value:"2",default:taskData.time==2},
-        {text:"Mor than a couple hours",value:"3",default:taskData.time==3},
+        {text:"More than a couple hours",value:"3",default:taskData.time==3},
         {text:"All day event",value:"4",default:taskData.time==4},
       ]
     },
@@ -915,8 +915,9 @@ function clearData(){
     html: '<br><button onclick="backupData()">Backup your data</button><br>',
     p: 'This will remove all of your data. backup data?',
   }, () => {
-    localStorage.clear();
-    setTimeout(window.location.reload(false), 100);
+    eval('localStorage.clear()')
+    console.log(localStorage.getItem('taskData'));
+    //setTimeout(window.location.reload(false), 500);
   })
 }
 
