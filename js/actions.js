@@ -938,6 +938,7 @@ function downloadApp(){
 }
 
 function setTheme(filter=userData.theme, write=true){
+  if(!userData.theme)userData.theme = '1none';
   if(filter == false){
     filter = userData.theme;
     var initial = true;
