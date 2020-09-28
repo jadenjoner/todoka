@@ -26,6 +26,7 @@ var bgImages = [
   'https://images.unsplash.com/photo-1599424056685-cacc7bee5cc3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
   'https://images.unsplash.com/photo-1572037938067-42a609926467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80'
 ]
+var randomImage = bgImages[((new Date()).getDate()-1)%10];
 
 function getData() {
   if(localStorage.getItem('taskData') == null)setData({tasks: []});
@@ -119,7 +120,7 @@ function page(number=currentPage){
         }}),
       }})
   })
-  setTheme()
+  setTheme(false)/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   if(userData.tasks.length == 1 && number == 0 && !userData.tutorialEnd){
     if(!userData.tasks[0].groups.length)
@@ -370,7 +371,6 @@ function generateInfo(task){
       d.setFullYear((new Date).getFullYear()+1)
       dayDistance = days_between(today, d)
       d.getDay = () => task.day;
-      console.log(dayDistance);
     };
     if(dayDistance == 0)return 'Tomorrow';
     else if(dayDistance <= 7)
@@ -875,6 +875,8 @@ function openOptions(){
         {text:"Neutral",value:"6hue-rotate(149deg) sepia(89%) grayscale(40%)",default:themeOption == 6,onclick:"setTheme('6hue-rotate(149deg) sepia(89%) grayscale(40%)', false)"},
       ]
     },
+    html10: '<br>',
+    p: 'Some changes need a refresh to take effect',
   }, (result) => {
     userData.bgImage = result.bgImage;
     restoreData(result.restoreFile, (result) => {
@@ -935,26 +937,11 @@ function downloadApp(){
   setTheme();
 }
 
-
-
 function setTheme(filter=userData.theme, write=true){
-  if(userData.bgImage){
-    $('main').style.backgroundImage = `url(${bgImages[Math.floor(Math.random()*(9-0+1)+0)]})`;
-    $('main').classList.add('uninvert');
-    $('main .center').classList.add('ununinvert');
-  } else {
-    $('main').style.backgroundImage = 'none';
-    $('main').classList.remove('uninvert');
-    $('main .center').classList.remove('ununinvert');
+  if(filter == false){
+    filter = userData.theme;
+    var initial = true;
   }
-  if(!userData.theme){
-    userData.theme = '1none';
-    setData();
-    return;
-  }
-  $('body').style.filter = filter.substr(1);
-  if(write)
-  userData.theme = filter;
   var hueRotation = filter.match(/hue-rotate\((.+?)deg\)/)
   hueRotation = hueRotation ? 360-hueRotation[1] : 0
   var invert = filter.match(/invert\((.+?)%\)/)
@@ -986,6 +973,25 @@ function setTheme(filter=userData.theme, write=true){
       backgroundColor: '',
     });
   }
+  if(initial)return;
+  if(userData.bgImage){
+    $('main').style.backgroundImage = `url(${randomImage})`;
+    $('main').classList.add('uninvert');
+    $('main .center').classList.add('ununinvert');
+  } else {
+    $('main').style.backgroundImage = 'none';
+    $('main').classList.remove('uninvert');
+    $('main .center').classList.remove('ununinvert');
+  }
+  if(!userData.theme){
+    userData.theme = '1none';
+    setData();
+    return;
+  }
+  $('body').style.filter = filter.substr(1);
+  if(write)
+  userData.theme = filter;
+
   setData();
 }
 
