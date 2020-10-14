@@ -915,9 +915,10 @@ function clearData(){
     html: '<br><button onclick="backupData()">Backup your data</button><br>',
     p: 'This will remove all of your data. backup data?',
   }, () => {
-    eval('localStorage.clear()')
-    console.log(localStorage.getItem('taskData'));
-    //setTimeout(window.location.reload(false), 500);
+    userData = {tasks:[]}
+    setData();
+    localStorage.removeItem('todoka');
+    setTimeout(window.location.reload(false), 500);
   })
 }
 
