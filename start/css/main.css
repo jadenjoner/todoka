@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background: #343c57;
+  background: #323A56;
   color: #b6bbc9;
 }
 
@@ -108,8 +108,12 @@ main .center h1 {
   font-weight: 500;
   text-align: center;
   padding-top: 40px;
-  text-shadow: 0px 4px #191d31, 0px -2px #efefef;
-  color: #b6bbc9;
+  text-shadow: 0px 4px #191d31, 0px -2px #5b48e9;
+  color: #d2d5de;
+}
+main .center a {
+  color: #5b48e9;
+  text-shadow: 0 0 4px #1e2237;
 }
 main .center .quote {
   font-size: 38px;
@@ -145,6 +149,11 @@ main .center .down-arrow:hover {
   cursor: pointer;
   fill: #9ea3bb;
 }
+main .center section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 main .center section .left {
   float: left;
 }
@@ -155,10 +164,13 @@ main .center section .text {
   width: 40%;
 }
 main .center section .image {
-  width: 60%;
+  width: 40%;
 }
 main .center section .right.text {
-  text-align: right;
+  padding-left: 20px;
+}
+main .center section .left.text {
+  padding-right: 20px;
 }
 main .center section h2 {
   font-size: 34px;
@@ -169,8 +181,6 @@ main .center section p {
   padding-top: 8px;
 }
 main .center section img {
-  border-radius: 8px;
-  border: 2px solid #191d31;
   width: 100%;
   margin: 20px 0;
 }
@@ -178,6 +188,9 @@ main .center section .clear {
   clear: both;
 }
 @media (max-width: 900px) {
+  main .center section {
+    display: block;
+  }
   main .center section .left, main .center section .right {
     width: 100%;
     float: none;
