@@ -619,26 +619,6 @@ function addTask(group, container=currentPage){
         };return result;
       })()}
     </select>`,
-    time: {
-      label: "How long will this task take?",
-      type: "radio",
-      options: [
-        {text:"Less than half an hour",value:"1",default:true},
-        {text:"Half an hour to an hour",value:"2"},
-        {text:"More than a couple hours",value:"3"},
-        {text:"All day event",value:"4"},
-        //{text:"This is a reminder",value:"5"},
-      ]
-    },
-    effort: {
-      label: "How difficult is this task",
-      type: "radio",
-      options: [
-        {text:"Easy",value:"1",default:true},
-        {text:"Moderate",value:"2"},
-        {text:"Difficult",value:"3"},
-      ]
-    },
   },(result) => {
     userData.tasks[currentPage].groups[group].tasks.push({
       useDate: result.hasDate,
@@ -646,8 +626,8 @@ function addTask(group, container=currentPage){
       month: result.month+1,
       name: result.name,
       date: result.dewdate,
-      time: result.time,
-      effort: result.effort,
+      time: 1,
+      effort: 1,
       priority: result.priority,
     })
     page(currentPage);
@@ -709,25 +689,6 @@ function editTask(group, task, container=currentPage){
         };return result;
       })()}
     </select>`,
-    time: {
-      label: "How long will this task take?",
-      type: "radio",
-      options: [
-        {text:"Less than half an hour",value:"1",default:taskData.time==1},
-        {text:"Half an hour to an hour",value:"2",default:taskData.time==2},
-        {text:"More than a couple hours",value:"3",default:taskData.time==3},
-        {text:"All day event",value:"4",default:taskData.time==4},
-      ]
-    },
-    effort: {
-      label: "How difficult is this task?",
-      type: "radio",
-      options: [
-        {text:"Easy",value:"1",default:taskData.effort==1},
-        {text:"Moderate",value:"2",default:taskData.effort==2},
-        {text:"Difficult",value:"3",default:taskData.effort==3},
-      ]
-    },
   },(result) => {
     userData.tasks[container].groups[group].tasks[task] = {
       useDate: result.hasDate,
@@ -735,8 +696,8 @@ function editTask(group, task, container=currentPage){
       month: result.month+1,
       name: result.name,
       date: result.dewdate,
-      time: result.time,
-      effort: result.effort,
+      time: 1,
+      effort: 1,
       priority: result.priority,
     }
     page();
